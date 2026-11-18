@@ -8,7 +8,7 @@ import ContactSection from "@/components/sections/ContactSection";
 
 export default function Home() {
   return (
-    <div className="relative w-full overflow-hidden bg-[#10100F] text-[#F5F1E8]">
+    <div className="relative w-full overflow-hidden text-[#F5F1E8]">
       <HeroSection />
       <MarqueeTicker />
       <AboutSection />

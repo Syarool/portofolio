@@ -1,13 +1,14 @@
 "use client";
 
-import React, { useRef, useEffect, useState } from "react";
+import React, { useRef } from "react";
 import { motion, useScroll, useTransform } from "motion/react";
 import { ArrowDown, ArrowUpRight } from "lucide-react";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
 
-/** Cinematic cliff-at-golden-hour SVG scene
- *  Extracted from "Portofolio – Hero Background.html"
- *  — no external image dependency, no watermark issues.
+/**
+ * Cinematic cliff-at-golden-hour SVG scene
+ * Extracted directly from "Portofolio – Hero Background.html"
+ * Exact visual match to Image 1: golden-hour sunset, dramatic clouds, cliff, figure with laptop.
  */
 function CinematicSVG() {
   return (
@@ -16,7 +17,7 @@ function CinematicSVG() {
       preserveAspectRatio="xMidYMid slice"
       xmlns="http://www.w3.org/2000/svg"
       aria-hidden="true"
-      className="absolute inset-0 w-full h-full"
+      className="w-full h-full object-cover block"
     >
       <defs>
         {/* Sky gradient: deep midnight → warm amber at horizon */}
@@ -78,16 +79,9 @@ function CinematicSVG() {
           <stop offset="1"   stopColor="#2a4010"/>
         </linearGradient>
 
-        {/* Turbulence / organic cloud shaping */}
-        <filter id="puff" x="-15%" y="-15%" width="130%" height="130%">
-          <feTurbulence type="fractalNoise" baseFrequency=".007 .013" numOctaves={5} seed={12} result="n"/>
-          <feDisplacementMap in="SourceGraphic" in2="n" scale={100}/>
-          <feGaussianBlur stdDeviation={5}/>
-        </filter>
-
         {/* Soft glow blur */}
-        <filter id="soft"><feGaussianBlur stdDeviation={16}/></filter>
-        <filter id="softer"><feGaussianBlur stdDeviation={28}/></filter>
+        <filter id="soft"><feGaussianBlur stdDeviation="16"/></filter>
+        <filter id="softer"><feGaussianBlur stdDeviation="28"/></filter>
       </defs>
 
       {/* 1. Sky base */}
@@ -99,10 +93,10 @@ function CinematicSVG() {
       <rect width="1600" height="900" fill="url(#horizon)"/>
 
       {/* 3. Thin atmospheric haze band at horizon */}
-      <rect x="0" y="480" width="1600" height="90" fill="#e08030" opacity=".18" filter="url(#softer)"/>
+      <rect x="0" y="480" width="1600" height="90" fill="#e08030" opacity=".22" filter="url(#softer)"/>
 
       {/* 4. Dark upper/left clouds */}
-      <g filter="url(#puff)" fill="url(#cloudDark)" opacity=".95">
+      <g fill="url(#cloudDark)" opacity=".95">
         <ellipse cx="80"  cy="210" rx="260" ry="115"/>
         <ellipse cx="380" cy="100" rx="205" ry="72"/>
         <ellipse cx="720" cy="52"  rx="230" ry="52"/>
@@ -110,7 +104,7 @@ function CinematicSVG() {
       </g>
 
       {/* 5. Brilliant warm cloud towers (right, backlit by sun) */}
-      <g filter="url(#puff)" fill="url(#cloudWarm)">
+      <g fill="url(#cloudWarm)">
         <ellipse cx="1140" cy="310" rx="230" ry="185"/>
         <ellipse cx="1420" cy="300" rx="200" ry="118"/>
         <ellipse cx="1340" cy="460" rx="340" ry="130"/>
@@ -119,7 +113,7 @@ function CinematicSVG() {
       </g>
 
       {/* 6. Mid-tone amber cloud bank */}
-      <g filter="url(#puff)" fill="url(#cloudMid)" opacity=".88">
+      <g fill="url(#cloudMid)" opacity=".88">
         <ellipse cx="1020" cy="620" rx="340" ry="115"/>
         <ellipse cx="1300" cy="750" rx="410" ry="115"/>
       </g>
@@ -130,12 +124,17 @@ function CinematicSVG() {
       </g>
 
       {/* 8. Foreground cliff/terrain */}
-      <path d="M0 572 C180 530 340 480 520 440 C670 408 800 418 900 455 C1000 490 1100 510 1220 568 L1230 900 L0 900 Z"
-            fill="url(#cliff)"/>
+      <path
+        d="M0 572 C180 530 340 480 520 440 C670 408 800 418 900 455 C1000 490 1100 510 1220 568 L1230 900 L0 900 Z"
+        fill="url(#cliff)"
+      />
 
       {/* Grass/vegetation strip on cliff edge */}
-      <path d="M320 476 C520 416 740 400 900 455 C1000 490 1100 510 1220 568 L1218 586 C1098 538 998 520 898 480 C740 432 548 448 320 508 Z"
-            fill="url(#grass)" opacity=".90"/>
+      <path
+        d="M320 476 C520 416 740 400 900 455 C1000 490 1100 510 1220 568 L1218 586 C1098 538 998 520 898 480 C740 432 548 448 320 508 Z"
+        fill="url(#grass)"
+        opacity=".90"
+      />
 
       {/* 9. Rocky outcrop center-left */}
       <path d="M570 338 L620 294 L700 304 L732 356 L700 396 L598 406 Z" fill="#6b5a46"/>
@@ -194,7 +193,7 @@ function CinematicSVG() {
       </g>
 
       {/* 15. Foreground depth edge vignette */}
-      <rect width="1600" height="900" fill="url(#cliff)" opacity=".10"/>
+      <rect width="1600" height="900" fill="url(#cliff)" opacity=".08"/>
     </svg>
   );
 }
@@ -202,40 +201,53 @@ function CinematicSVG() {
 export default function HeroSection() {
   const containerRef = useRef<HTMLDivElement>(null);
   const prefersReduced = useReducedMotion();
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
 
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ["start start", "end start"],
   });
 
-  const bgY = useTransform(scrollYProgress, [0, 1], ["0%", "20%"]);
-  const textY = useTransform(scrollYProgress, [0, 1], ["0%", "30%"]);
-  const textOpacity = useTransform(scrollYProgress, [0, 0.65], [1, 0]);
+  const bgY = useTransform(scrollYProgress, [0, 1], ["0%", "18%"]);
+  const textY = useTransform(scrollYProgress, [0, 1], ["0%", "28%"]);
+  const textOpacity = useTransform(scrollYProgress, [0, 0.75], [1, 0]);
 
   return (
     <section
       ref={containerRef}
       id="home"
-      className="relative min-h-screen w-full overflow-hidden flex flex-col justify-end pb-16 sm:pb-20 lg:pb-28 pt-32"
+      className="relative min-h-screen w-full overflow-hidden isolate flex flex-col justify-end pb-16 sm:pb-20 lg:pb-28 pt-32"
     >
       {/* =========================================================================
-          CINEMATIC SVG BACKGROUND — Cliff at golden hour (no watermark)
+          CINEMATIC BACKGROUND — Cliff at golden hour (isolated, z-0)
          ========================================================================= */}
       <motion.div
-        className="absolute inset-0 -z-10 h-[115%] w-full"
+        className="absolute inset-0 z-0 h-[112%] w-full pointer-events-none"
         style={{ y: prefersReduced ? 0 : bgY }}
       >
         <CinematicSVG />
 
-        {/* Gradient overlays — tuned to let the cinematic scene breathe */}
-        <div className="absolute inset-0 bg-gradient-to-t from-[#10100F] via-[#10100F]/50 to-transparent" />
-        <div className="absolute inset-0 bg-gradient-to-r from-[#10100F]/80 via-[#10100F]/30 to-transparent" />
-        <div className="absolute top-0 left-0 right-0 h-32 bg-gradient-to-b from-[#10100F]/60 to-transparent" />
+        {/* Soft, balanced gradient overlays — only dims text area on left/bottom */}
+        <div
+          className="absolute inset-0 z-[1] pointer-events-none"
+          style={{
+            background:
+              "linear-gradient(90deg, rgba(16,16,15,0.85) 0%, rgba(16,16,15,0.40) 45%, transparent 75%)",
+          }}
+        />
+        <div
+          className="absolute inset-0 z-[1] pointer-events-none"
+          style={{
+            background:
+              "linear-gradient(0deg, rgba(16,16,15,0.95) 0%, rgba(16,16,15,0.25) 35%, transparent 65%)",
+          }}
+        />
+        <div
+          className="absolute top-0 left-0 right-0 h-28 z-[1] pointer-events-none"
+          style={{
+            background:
+              "linear-gradient(180deg, rgba(16,16,15,0.60) 0%, transparent 100%)",
+          }}
+        />
       </motion.div>
 
       {/* =========================================================================
@@ -251,22 +263,22 @@ export default function HeroSection() {
         >
           {/* Tag line */}
           <motion.div
-            initial={{ opacity: 0, y: 24 }}
-            animate={{ opacity: mounted ? 1 : 0, y: mounted ? 0 : 24 }}
-            transition={{ duration: 0.9, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.15 }}
             className="flex items-center gap-3 text-xs sm:text-sm font-light tracking-wider text-[#B8B3AA]"
           >
             <span className="h-px w-8 bg-[#D89A5B]" />
             <span>Business System Development &amp; Web Developer</span>
             <span className="h-1 w-1 rounded-full bg-[#D89A5B]" />
-            <span className="text-[#F5F1E8]/60">Based in Indonesia</span>
+            <span className="text-[#F5F1E8]/70">Based in Indonesia</span>
           </motion.div>
 
           {/* Oversized serif name */}
           <motion.h1
-            initial={{ opacity: 0, y: 40 }}
-            animate={{ opacity: mounted ? 1 : 0, y: mounted ? 0 : 40 }}
-            transition={{ duration: 1.1, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1.0, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
             className="font-serif-headline text-[13vw] sm:text-[11vw] lg:text-[9vw] xl:text-[8vw] 2xl:text-[112px] font-normal tracking-tight text-[#F5F1E8] leading-[0.9]"
           >
             Syahrul
@@ -276,10 +288,10 @@ export default function HeroSection() {
 
           {/* Supporting description */}
           <motion.p
-            initial={{ opacity: 0, y: 24 }}
-            animate={{ opacity: mounted ? 1 : 0, y: mounted ? 0 : 24 }}
-            transition={{ duration: 0.9, delay: 0.52, ease: [0.16, 1, 0.3, 1] }}
-            className="text-sm sm:text-base lg:text-lg font-light text-[#F5F1E8]/80 leading-relaxed max-w-xl"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.45 }}
+            className="text-sm sm:text-base lg:text-lg font-light text-[#F5F1E8]/85 leading-relaxed max-w-xl"
           >
             I design and develop digital solutions that connect technology,
             business processes, and meaningful user experiences.
@@ -287,9 +299,9 @@ export default function HeroSection() {
 
           {/* CTA Buttons */}
           <motion.div
-            initial={{ opacity: 0, y: 24 }}
-            animate={{ opacity: mounted ? 1 : 0, y: mounted ? 0 : 24 }}
-            transition={{ duration: 0.9, delay: 0.68, ease: [0.16, 1, 0.3, 1] }}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.6 }}
             className="flex flex-wrap items-center gap-4 pt-4"
           >
             <a
@@ -302,7 +314,7 @@ export default function HeroSection() {
 
             <a
               href="#contact"
-              className="group inline-flex items-center gap-2.5 rounded-full border border-[#F5F1E8]/30 bg-[#F5F1E8]/8 backdrop-blur-md px-7 py-3.5 text-xs sm:text-sm font-medium tracking-wide text-[#F5F1E8] transition-all duration-300 hover:border-[#F5F1E8]/70 hover:bg-[#F5F1E8]/15"
+              className="group inline-flex items-center gap-2.5 rounded-full border border-[#F5F1E8]/30 bg-[#F5F1E8]/10 backdrop-blur-md px-7 py-3.5 text-xs sm:text-sm font-medium tracking-wide text-[#F5F1E8] transition-all duration-300 hover:border-[#F5F1E8]/70 hover:bg-[#F5F1E8]/20"
             >
               <span>Let&apos;s Connect</span>
               <ArrowUpRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
@@ -314,18 +326,15 @@ export default function HeroSection() {
       {/* Scroll indicator */}
       <motion.div
         initial={{ opacity: 0 }}
-        animate={{ opacity: mounted ? 1 : 0 }}
-        transition={{ duration: 1.2, delay: 1.2 }}
-        className="absolute bottom-10 right-8 sm:right-12 lg:right-16 z-10 flex flex-col items-center gap-2"
+        animate={{ opacity: 1 }}
+        transition={{ duration: 1.0, delay: 1.0 }}
+        className="absolute bottom-10 right-8 sm:right-12 lg:right-16 z-10 flex flex-col items-center gap-2 pointer-events-none"
       >
         <span className="text-[9px] uppercase tracking-[0.25em] text-[#B8B3AA]/70 [writing-mode:vertical-rl]">
           Scroll
         </span>
         <div className="h-12 w-px bg-gradient-to-b from-[#D89A5B]/80 to-transparent" />
       </motion.div>
-
-      {/* Warm ambient glow at the base */}
-      <div className="pointer-events-none absolute -bottom-10 left-1/4 h-80 w-80 rounded-full bg-[#D89A5B]/8 blur-[100px] z-0" />
     </section>
   );
 }
