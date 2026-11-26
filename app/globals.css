@@ -1,12 +1,13 @@
 @import "tailwindcss";
 
 :root {
-  --background: #10100F;
+  --background: #0D0D10;
   --foreground: #F5F1E8;
   --secondary: #B8B3AA;
   --accent: #D89A5B;
+  --accent-cyan: #7CE0D3;
   --accent-secondary: #75604D;
-  --surface: #171615;
+  --surface: #15151A;
   --border-subtle: rgba(245, 241, 232, 0.08);
   --border-medium: rgba(245, 241, 232, 0.16);
 }
@@ -17,19 +18,21 @@
   --color-secondary: var(--secondary);
   --color-accent: var(--accent);
   --color-accent-secondary: var(--accent-secondary);
+  --font-sans: var(--font-sans), system-ui, sans-serif;
+  --font-mono: var(--font-mono), monospace;
 }
 
 html {
   scroll-behavior: smooth;
-  background-color: #10100F;
+  background-color: #0D0D10;
   color: #F5F1E8;
   overflow-x: hidden;
 }
 
 body {
-  background: #10100F;
+  background: #0D0D10;
   color: #F5F1E8;
-  font-family: 'Plus Jakarta Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-family: var(--font-sans), system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   overflow-x: hidden;
   min-height: 100vh;
   position: relative;
@@ -37,54 +40,48 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Elegant Editorial Serif */
-.font-serif-headline {
-  font-family: 'Playfair Display', 'Cormorant Garamond', Georgia, serif;
-  letter-spacing: -0.02em;
-}
-
-.font-serif-subtle {
-  font-family: 'Cormorant Garamond', Georgia, serif;
-}
-
 /* ============================================================
    MODERN-PIXEL HYBRID TYPOGRAPHY & UTILITIES
    ============================================================ */
 .font-pixel {
-  font-family: 'Pixelify Sans', 'Silkscreen', monospace;
-  letter-spacing: 0.01em;
+  font-family: var(--font-pixel), var(--font-silkscreen), monospace;
+  letter-spacing: -0.01em;
 }
 
 .font-pixel-accent {
-  font-family: 'Silkscreen', monospace;
+  font-family: var(--font-silkscreen), monospace;
   letter-spacing: 0.05em;
 }
 
-/* Pixel box with retro hard shadows & crisp border */
+.font-mono {
+  font-family: var(--font-mono), monospace;
+}
+
+/* Pixel box with retro hard shadows, subtle border & 3D depth */
 .pixel-box {
-  background: #171615;
-  border: 2px solid rgba(245, 241, 232, 0.16);
-  box-shadow: 4px 4px 0px 0px #0a0a09, 4px 4px 0px 1px rgba(216, 154, 91, 0.35);
-  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  background: #141419;
+  border: 2px solid rgba(245, 241, 232, 0.14);
+  box-shadow: 4px 4px 0px 0px #060608, 4px 4px 0px 1px rgba(216, 154, 91, 0.28);
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
 .pixel-box:hover {
-  border-color: rgba(216, 154, 91, 0.6);
-  box-shadow: 6px 6px 0px 0px #0a0a09, 6px 6px 0px 1px #D89A5B;
-  transform: translate(-1px, -1px);
+  border-color: rgba(216, 154, 91, 0.65);
+  box-shadow: 6px 6px 0px 0px #060608, 6px 6px 0px 1px #D89A5B;
+  transform: translate(-2px, -2px);
 }
 
 /* Retro Interactive Button */
 .pixel-btn {
   display: inline-flex;
   align-items: center;
-  gap: 0.5rem;
-  font-family: 'Pixelify Sans', monospace;
+  gap: 0.55rem;
+  font-family: var(--font-pixel), monospace;
   font-weight: 600;
   padding: 0.75rem 1.5rem;
   border: 2px solid #F5F1E8;
   background: #F5F1E8;
-  color: #10100F;
+  color: #0D0D10;
   box-shadow: 4px 4px 0px 0px #000;
   transition: all 0.15s ease-out;
   cursor: pointer;
@@ -105,21 +102,23 @@ body {
 .pixel-btn-outline {
   display: inline-flex;
   align-items: center;
-  gap: 0.5rem;
-  font-family: 'Pixelify Sans', monospace;
+  gap: 0.55rem;
+  font-family: var(--font-pixel), monospace;
   font-weight: 500;
   padding: 0.75rem 1.5rem;
   border: 2px solid rgba(245, 241, 232, 0.35);
-  background: rgba(16, 16, 15, 0.75);
+  background: rgba(13, 13, 16, 0.8);
   color: #F5F1E8;
   backdrop-filter: blur(8px);
   box-shadow: 4px 4px 0px 0px #000;
   transition: all 0.15s ease-out;
+  cursor: pointer;
 }
 
 .pixel-btn-outline:hover {
-  border-color: #F5F1E8;
-  background: rgba(245, 241, 232, 0.12);
+  border-color: #D89A5B;
+  color: #D89A5B;
+  background: rgba(216, 154, 91, 0.08);
   box-shadow: 6px 6px 0px 0px #000;
   transform: translate(-2px, -2px);
 }
@@ -134,13 +133,13 @@ body {
   display: inline-flex;
   align-items: center;
   gap: 0.35rem;
-  font-family: 'Silkscreen', monospace;
+  font-family: var(--font-silkscreen), monospace;
   font-size: 0.65rem;
-  padding: 0.25rem 0.6rem;
-  border: 1px solid rgba(216, 154, 91, 0.4);
+  padding: 0.25rem 0.65rem;
+  border: 1px solid rgba(216, 154, 91, 0.45);
   background: rgba(216, 154, 91, 0.1);
   color: #D89A5B;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.06em;
   text-transform: uppercase;
   box-shadow: 2px 2px 0px 0px #000;
 }
@@ -151,62 +150,44 @@ body {
   image-rendering: crisp-edges;
 }
 
-/* Subtle CRT Scanlines (Lo-Fi game aesthetic) */
+/* Subtle CRT Scanlines */
 .crt-overlay::before {
-  content: " ";
+  content: "";
   display: block;
   position: fixed;
-  top: 0; left: 0; bottom: 0; right: 0;
-  background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.03), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.03));
+  inset: 0;
+  background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.22) 50%),
+    linear-gradient(90deg, rgba(255, 0, 0, 0.02), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.02));
   z-index: 9997;
   background-size: 100% 3px, 6px 100%;
   pointer-events: none;
-  opacity: 0.35;
+  opacity: 0.25;
 }
 
-/* Warm subtle scrollbar */
+/* Scrollbar */
 ::-webkit-scrollbar {
   width: 6px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #10100F;
+  background: #0D0D10;
 }
 
 ::-webkit-scrollbar-thumb {
   background: #2b2724;
-  border-radius: 9999px;
-  border: 1px solid #10100F;
+  border: 1px solid #0D0D10;
 }
 
 ::-webkit-scrollbar-thumb:hover {
   background: #D89A5B;
 }
 
-/* Warm Ivory & Muted Amber Selection */
 ::selection {
   background: rgba(216, 154, 91, 0.35);
   color: #F5F1E8;
 }
 
-/* Atmospheric Editorial Glass */
-.glass-editorial {
-  background: rgba(23, 22, 21, 0.72);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(245, 241, 232, 0.08);
-}
-
-.glass-editorial-dark {
-  background: rgba(16, 16, 15, 0.85);
-  backdrop-filter: blur(24px);
-  -webkit-backdrop-filter: blur(24px);
-  border: 1px solid rgba(245, 241, 232, 0.06);
-}
-
-/* ============================================================
-   CINEMATIC FILM GRAIN — Atmospheric texture overlay
-   ============================================================ */
+/* Atmospheric grain */
 .film-grain::after {
   content: '';
   position: fixed;
@@ -219,24 +200,16 @@ body {
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E");
   background-repeat: repeat;
   background-size: 180px 180px;
-  opacity: 0.028;
+  opacity: 0.025;
   pointer-events: none;
   z-index: 9999;
-  animation: grain-shift 0.5s steps(1) infinite;
 }
 
-@keyframes grain-shift {
-  0%   { transform: translate(0, 0); }
-  10%  { transform: translate(-3%, -4%); }
-  20%  { transform: translate(2%, 5%); }
-  30%  { transform: translate(-4%, 2%); }
-  40%  { transform: translate(5%, -3%); }
-  50%  { transform: translate(-2%, 6%); }
-  60%  { transform: translate(4%, 2%); }
-  70%  { transform: translate(-5%, -1%); }
-  80%  { transform: translate(3%, 4%); }
-  90%  { transform: translate(-1%, -5%); }
-  100% { transform: translate(0, 0); }
+@media (prefers-reduced-motion: reduce) {
+  .crt-overlay::before,
+  .film-grain::after {
+    display: none;
+  }
 }
 
 /* Scroll progress bar */
@@ -244,28 +217,10 @@ body {
   position: fixed;
   top: 0;
   left: 0;
-  height: 2px;
-  background: linear-gradient(90deg, #D89A5B, #F5F1E8);
+  height: 3px;
+  background: linear-gradient(90deg, #D89A5B, #7CE0D3, #F5F1E8);
   z-index: 9998;
   transform-origin: left;
-}
-
-/* Decorative oversized ghost number for sections */
-.section-ghost-number {
-  font-family: 'Playfair Display', 'Cormorant Garamond', Georgia, serif;
-  font-size: clamp(6rem, 20vw, 18rem);
-  font-weight: 800;
-  line-height: 1;
-  color: transparent;
-  -webkit-text-stroke: 1px rgba(245, 241, 232, 0.04);
-  pointer-events: none;
-  user-select: none;
-  letter-spacing: -0.04em;
-}
-
-/* Warm radial glow */
-.warm-glow {
-  background: radial-gradient(ellipse at center, rgba(216, 154, 91, 0.12) 0%, transparent 65%);
 }
 
 /* Marquee scroll */
@@ -275,9 +230,23 @@ body {
 }
 
 .marquee-track {
-  animation: marquee-left 25s linear infinite;
+  animation: marquee-left 28s linear infinite;
 }
 
 .marquee-track:hover {
   animation-play-state: paused;
+}
+
+/* Pixel star twinkle & astronaut/planet animations */
+@keyframes twinkle-step {
+  0%, 100% { opacity: 0.25; }
+  50% { opacity: 1; }
+}
+
+.animate-twinkle-slow {
+  animation: twinkle-step 3.2s steps(2, end) infinite;
+}
+
+.animate-twinkle-fast {
+  animation: twinkle-step 1.8s steps(2, end) infinite;
 }

@@ -1,132 +1,83 @@
-export interface ExpertiseItem {
+export interface SkillCategory {
   id: string;
-  number: string;
+  code: string;
   title: string;
-  description: string;
-  impact: string;
+  summary: string;
+  items: {
+    name: string;
+    detail: string;
+    level: string;
+  }[];
 }
 
-export interface TechnologyItem {
-  name: string;
-  category: "Frontend" | "Backend" | "Database" | "Design & Motion";
-  description: string;
-  proficiency: string;
-}
+export const SKILLS_HEADLINE = "Capabilities & Tech Stack.";
+export const SKILLS_SUBTITLE =
+  "A structured blend of full-stack engineering, relational database modeling, human-centered UI/UX, and modern development workflows.";
 
-export const EXPERTISE_HEADLINE = "Crafted With Curiosity.";
-export const EXPERTISE_SUBTITLE =
-  "A dedicated synthesis of business system architecture, robust web engineering, and human-centered design principles.";
-
-export const EXPERTISE_LIST: ExpertiseItem[] = [
+export const SKILL_CATEGORIES: SkillCategory[] = [
   {
-    id: "business-systems",
-    number: "01",
-    title: "Business System Development",
-    description:
-      "Engineering custom enterprise platforms that replace disconnected spreadsheets and paper forms with cohesive, automated business systems.",
-    impact: "Turn operational friction into streamlined internal workflows.",
+    id: "frontend",
+    code: "01",
+    title: "Frontend Development",
+    summary: "Building responsive, interactive, and type-safe web interfaces.",
+    items: [
+      { name: "Next.js", detail: "App Router, SSR/SSG, Server & Client Components", level: "Core" },
+      { name: "React", detail: "Reusable component systems & modern hooks", level: "Advanced" },
+      { name: "TypeScript", detail: "End-to-end type safety & clean interfaces", level: "Advanced" },
+      { name: "Tailwind CSS", detail: "Utility-first design tokens & responsive grids", level: "Advanced" },
+      { name: "Framer Motion", detail: "Scroll parallax, spring physics & micro-interactions", level: "Proficient" },
+      { name: "JavaScript (ES6+)", detail: "Async DOM logic, browser APIs & state handling", level: "Advanced" },
+    ],
   },
   {
-    id: "web-development",
-    number: "02",
-    title: "Web Development",
-    description:
-      "Developing high-performance, accessible, and reactive web applications utilizing Next.js, React, and TypeScript with rigorous architectural standards.",
-    impact: "Flawless responsiveness, high speed, and clean codebases.",
+    id: "backend",
+    code: "02",
+    title: "Backend Development",
+    summary: "Designing reliable APIs, authentication flows, and server business logic.",
+    items: [
+      { name: "Node.js", detail: "Server-side JavaScript runtime & REST services", level: "Proficient" },
+      { name: "Express.js", detail: "Modular API routing, middleware & validation", level: "Proficient" },
+      { name: "Next.js API / Actions", detail: "Integrated full-stack endpoints & server handlers", level: "Proficient" },
+      { name: "REST API Architecture", detail: "Structured contracts, error handling & CRUD flows", level: "Proficient" },
+      { name: "Auth & RBAC", detail: "Role-based access permissions for HR & admins", level: "Applied" },
+    ],
   },
   {
-    id: "ui-ux-design",
-    number: "03",
-    title: "UI/UX Design",
-    description:
-      "Crafting intuitive user interfaces, comprehensive Figma wireframes, and design systems where clarity, aesthetic refinement, and ease of use meet.",
-    impact: "Higher adoption rates and intuitive digital journeys.",
-  },
-  {
-    id: "system-analysis",
-    number: "04",
-    title: "System Analysis",
-    description:
-      "Conducting in-depth audits of operational bottlenecks, data flows, and team requirements to formulate actionable technical blueprints.",
-    impact: "Diagnose problems before writing a single line of code.",
-  },
-  {
-    id: "database-management",
-    number: "05",
+    id: "database",
+    code: "03",
     title: "Database Management",
-    description:
-      "Designing normalized relational data models, schema migrations, and secure queries across PostgreSQL and SQL engines for data integrity.",
-    impact: "Bulletproof data consistency and fast retrieval.",
+    summary: "Structuring normalized schemas, migrations, and dependable data pipelines.",
+    items: [
+      { name: "PostgreSQL", detail: "Relational modeling, constraints & structured queries", level: "Proficient" },
+      { name: "SQLite", detail: "Lightweight relational storage for internal tools", level: "Proficient" },
+      { name: "Knex.js", detail: "SQL query builder, schema migrations & seeding", level: "Proficient" },
+      { name: "Prisma ORM", detail: "Type-safe database modeling & client queries", level: "Proficient" },
+      { name: "SQL", detail: "Joins, indexing, filtering & reporting queries", level: "Proficient" },
+    ],
   },
   {
-    id: "bpo",
-    number: "06",
-    title: "Business Process Optimization",
-    description:
-      "Redesigning organizational handoffs, automating recurring tasks, and reducing cycle times across hiring, onboarding, and administrative operations.",
-    impact: "Measurable time and resource savings.",
-  },
-];
-
-export const TECHNOLOGIES: TechnologyItem[] = [
-  {
-    name: "Next.js",
-    category: "Frontend",
-    description: "App Router, SSR/SSG, Server Components & full-stack web architecture.",
-    proficiency: "Core Framework",
+    id: "ui-ux",
+    code: "04",
+    title: "UI/UX Design",
+    summary: "Translating complex operational processes into clear, engaging user journeys.",
+    items: [
+      { name: "Figma", detail: "Wireframing, component libraries & visual prototypes", level: "Advanced" },
+      { name: "System UI Optimization", detail: "Improving usability of internal enterprise dashboards", level: "Applied" },
+      { name: "Visual Design & Branding", detail: "Posters, campaigns, corporate visual assets", level: "Proficient" },
+      { name: "User Flow Mapping", detail: "Simplifying multi-step hiring and onboarding flows", level: "Applied" },
+    ],
   },
   {
-    name: "React",
-    category: "Frontend",
-    description: "Component composition, reactive state, custom hooks, and modern React 19.",
-    proficiency: "Advanced",
-  },
-  {
-    name: "TypeScript",
-    category: "Frontend",
-    description: "Strict typing, interface contracts, maintainable enterprise architecture.",
-    proficiency: "Advanced",
-  },
-  {
-    name: "Tailwind CSS",
-    category: "Frontend",
-    description: "Utility-first design systems, responsive typography, and editorial styling.",
-    proficiency: "Advanced",
-  },
-  {
-    name: "Node.js",
-    category: "Backend",
-    description: "Server runtime, asynchronous I/O, micro-services, and CLI utilities.",
-    proficiency: "Proficient",
-  },
-  {
-    name: "Express.js",
-    category: "Backend",
-    description: "RESTful API routes, modular controllers, and token authentication.",
-    proficiency: "Proficient",
-  },
-  {
-    name: "PostgreSQL",
-    category: "Database",
-    description: "Relational modeling, indexing, transactions, and schema integrity.",
-    proficiency: "Proficient",
-  },
-  {
-    name: "Prisma",
-    category: "Database",
-    description: "Declarative schema modeling, type-safe queries, and automated migrations.",
-    proficiency: "Proficient",
-  },
-  {
-    name: "Figma",
-    category: "Design & Motion",
-    description: "Wireframing, high-fidelity prototypes, user journey mapping & design tokens.",
-    proficiency: "Advanced",
-  },
-  {
-    name: "GSAP",
-    category: "Design & Motion",
-    description: "ScrollTrigger timelines, multi-layer parallax choreographies & kinetic motion.",
-    proficiency: "Advanced",
+    id: "tools",
+    code: "05",
+    title: "Development Tools",
+    summary: "Everyday tooling for version control, debugging, bundling, and deployment.",
+    items: [
+      { name: "Git & GitHub", detail: "Branching, clean commit history & repository management", level: "Proficient" },
+      { name: "VS Code", detail: "Primary TypeScript & Next.js development environment", level: "Daily" },
+      { name: "Vite", detail: "Fast frontend build tooling for React applications", level: "Proficient" },
+      { name: "Postman", detail: "API endpoint testing & payload verification", level: "Proficient" },
+      { name: "Vercel", detail: "Production builds, previews & cloud deployment", level: "Proficient" },
+    ],
   },
 ];

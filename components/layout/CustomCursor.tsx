@@ -5,7 +5,6 @@ import { motion, useSpring } from "motion/react";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
 
 export default function CustomCursor() {
-  const [mounted, setMounted] = useState(false);
   const [isPointer, setIsPointer] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
   const prefersReduced = useReducedMotion();
@@ -20,14 +19,12 @@ export default function CustomCursor() {
     const isTouch = window.matchMedia("(pointer: coarse)").matches;
     if (isTouch || prefersReduced) return;
 
-    setMounted(true);
-
     const handleMouseMove = (e: MouseEvent) => {
       cursorX.set(e.clientX);
       cursorY.set(e.clientY);
       auraX.set(e.clientX);
       auraY.set(e.clientY);
-      if (!isVisible) setIsVisible(true);
+      setIsVisible(true);
 
       const target = e.target as HTMLElement | null;
       if (
@@ -55,9 +52,9 @@ export default function CustomCursor() {
       document.removeEventListener("mouseleave", handleMouseLeave);
       document.removeEventListener("mouseenter", handleMouseEnter);
     };
-  }, [cursorX, cursorY, auraX, auraY, isVisible, prefersReduced]);
+  }, [cursorX, cursorY, auraX, auraY, prefersReduced]);
 
-  if (!mounted || prefersReduced || !isVisible) return null;
+  if (prefersReduced || !isVisible) return null;
 
   return (
     <div className="pointer-events-none fixed inset-0 z-50 overflow-hidden">

@@ -1,21 +1,19 @@
 "use client";
 
 import React from "react";
-import { motion } from "motion/react";
 import {
   EXPERIENCE_HEADLINE,
   EXPERIENCE_SUBTITLE,
   EXPERIENCES,
-  ExperienceItem,
 } from "@/data/experience";
 import RevealOnScroll from "../animations/RevealOnScroll";
-import { Building2, Calendar, MapPin, CheckCircle2, Flag } from "lucide-react";
+import { Building2, Calendar, MapPin, Flag } from "lucide-react";
 
 export default function ExperienceSection() {
   return (
     <section
       id="experience"
-      className="relative py-24 sm:py-32 lg:py-36 bg-[#10100F] text-[#F5F1E8] overflow-hidden border-t-2 border-[#D89A5B]/20"
+      className="relative py-24 sm:py-32 bg-[#0D0D10] text-[#F5F1E8] overflow-hidden border-t-2 border-[#D89A5B]/20"
     >
       {/* Ambient glow */}
       <div className="pointer-events-none absolute bottom-0 left-0 h-[400px] w-[400px] rounded-full bg-[#D89A5B]/5 blur-[130px]" />
@@ -25,7 +23,7 @@ export default function ExperienceSection() {
         className="pointer-events-none absolute -left-4 top-8 select-none font-pixel text-8xl sm:text-9xl font-bold text-white/[0.03]"
         aria-hidden="true"
       >
-        QUEST_04
+        03 // EXP
       </div>
 
       <div className="mx-auto max-w-7xl px-6 sm:px-8 lg:px-12 relative z-10">
@@ -34,13 +32,13 @@ export default function ExperienceSection() {
           <RevealOnScroll direction="up">
             <span className="pixel-badge">
               <Flag className="h-3 w-3" />
-              QUEST 04 // CAREER QUEST TIMELINE
+              03 // EXPERIENCE
             </span>
           </RevealOnScroll>
 
           <RevealOnScroll direction="up" delay={0.1}>
             <h2 className="font-pixel text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-[#F5F1E8]">
-              CAREER TRAJECTORY<span className="text-[#D89A5B]">.</span>
+              {EXPERIENCE_HEADLINE}
             </h2>
           </RevealOnScroll>
 
@@ -51,12 +49,11 @@ export default function ExperienceSection() {
           </RevealOnScroll>
         </div>
 
-        {/* Retro Vertical Timeline */}
+        {/* Vertical Timeline */}
         <div className="mt-14 sm:mt-20 relative">
-          {/* Subtle vertical center guide line */}
-          <div className="absolute top-2 bottom-6 left-4 sm:left-1/2 -translate-x-1/2 w-0.5 bg-gradient-to-b from-[#D89A5B] via-[#F5F1E8]/20 to-transparent" />
+          <div className="absolute top-2 bottom-6 left-4 sm:left-1/2 -translate-x-1/2 w-0.5 bg-gradient-to-b from-[#D89A5B] via-[#7CE0D3]/40 to-transparent" />
 
-          <div className="space-y-12 sm:space-y-20">
+          <div className="space-y-12 sm:space-y-16">
             {EXPERIENCES.map((exp, idx) => {
               const isEven = idx % 2 === 0;
 
@@ -67,20 +64,27 @@ export default function ExperienceSection() {
                     isEven ? "sm:flex-row-reverse" : ""
                   }`}
                 >
-                  {/* Timeline Center Pixel Node */}
-                  <div className="absolute left-4 sm:left-1/2 -translate-x-1/2 top-2 flex h-5 w-5 items-center justify-center bg-[#D89A5B] text-[#10100F] font-pixel text-[10px] font-bold shadow-[2px_2px_0_0_#000] z-10">
-                    {idx + 1}
+                  {/* Pixel Timeline Node */}
+                  <div className="absolute left-4 sm:left-1/2 -translate-x-1/2 top-3 flex h-6 w-6 items-center justify-center bg-[#D89A5B] text-[#0D0D10] font-pixel text-xs font-bold shadow-[2px_2px_0_0_#000] z-10">
+                    0{idx + 1}
                   </div>
 
-                  {/* Content Card (Left or Right on Desktop) */}
+                  {/* Content Card */}
                   <div className="pl-12 sm:pl-0 sm:w-1/2 sm:px-8">
                     <RevealOnScroll direction={isEven ? "left" : "right"}>
-                      <div className="pixel-box p-5 sm:p-6 space-y-4 bg-[#141211]">
-                        {/* Period & Location Badge */}
+                      <div className="pixel-box p-6 space-y-4 bg-[#141419]">
+                        {/* Header Metadata */}
                         <div className="flex flex-wrap items-center justify-between gap-2 text-xs font-mono text-[#B8B3AA]">
-                          <div className="pixel-badge !py-0.5">
-                            <Calendar className="h-3 w-3" />
-                            <span>{exp.year}</span>
+                          <div className="flex flex-wrap items-center gap-2">
+                            <span className="pixel-badge !py-0.5">
+                              <Calendar className="h-3 w-3" />
+                              {exp.year}
+                            </span>
+                            {exp.program && (
+                              <span className="pixel-badge !py-0.5 !border-[#7CE0D3]/50 !text-[#7CE0D3] !bg-[#7CE0D3]/10">
+                                Program: {exp.program}
+                              </span>
+                            )}
                           </div>
                           <div className="flex items-center gap-1">
                             <MapPin className="h-3 w-3 text-[#D89A5B]" />
@@ -88,14 +92,27 @@ export default function ExperienceSection() {
                           </div>
                         </div>
 
-                        {/* Role & Company */}
+                        {/* Company & Role */}
                         <div>
-                          <h3 className="font-pixel text-2xl sm:text-3xl text-[#F5F1E8] font-bold leading-snug">
+                          <div className="flex items-center gap-2 text-sm font-mono text-[#D89A5B] font-bold">
+                            <Building2 className="h-4 w-4" />
+                            <span>{exp.company}</span>
+                          </div>
+                          <h3 className="font-pixel text-2xl sm:text-3xl text-[#F5F1E8] font-bold leading-snug mt-1">
                             {exp.role}
                           </h3>
-                          <div className="text-xs sm:text-sm font-mono text-[#D89A5B] mt-1 font-bold">
-                            @ {exp.company}
-                          </div>
+                        </div>
+
+                        {/* Focus Areas Highlight */}
+                        <div className="flex flex-wrap gap-1.5">
+                          {exp.focusAreas.map((area) => (
+                            <span
+                              key={area}
+                              className="font-mono text-[10px] px-2 py-0.5 border border-[#D89A5B]/30 bg-[#D89A5B]/10 text-[#F5F1E8]"
+                            >
+                              {area}
+                            </span>
+                          ))}
                         </div>
 
                         {/* Summary */}
@@ -103,30 +120,30 @@ export default function ExperienceSection() {
                           {exp.summary}
                         </p>
 
-                        {/* Key Accomplishments */}
-                        <div className="space-y-2 pt-2 border-t border-[#F5F1E8]/8">
+                        {/* Contributions */}
+                        <div className="space-y-2 pt-3 border-t border-[#F5F1E8]/8">
                           <span className="text-[10px] font-mono uppercase tracking-wider text-[#D89A5B] font-bold block">
-                            KEY QUEST ACCOMPLISHMENTS:
+                            Key Contributions &amp; Systems Delivered:
                           </span>
-                          <div className="space-y-1.5">
+                          <ul className="space-y-1.5">
                             {exp.keyContributions.map((contrib, cIdx) => (
-                              <div
+                              <li
                                 key={cIdx}
-                                className="flex items-start gap-2 text-xs text-[#B8B3AA] font-light"
+                                className="flex items-start gap-2 text-xs text-[#B8B3AA] font-light leading-relaxed"
                               >
-                                <span className="text-[#D89A5B] mt-0.5">▪</span>
+                                <span className="text-[#D89A5B] mt-0.5 shrink-0">▸</span>
                                 <span>{contrib}</span>
-                              </div>
+                              </li>
                             ))}
-                          </div>
+                          </ul>
                         </div>
 
-                        {/* Badges */}
+                        {/* Tags */}
                         <div className="flex flex-wrap gap-1.5 pt-2">
                           {exp.skills.map((skill) => (
                             <span
                               key={skill}
-                              className="pixel-badge !text-[9px] !bg-[#1c1a19] !border-[#F5F1E8]/10 !text-[#F5F1E8]/80"
+                              className="font-mono text-[10px] px-2 py-0.5 border border-[#F5F1E8]/12 bg-[#0D0D10] text-[#B8B3AA]"
                             >
                               {skill}
                             </span>

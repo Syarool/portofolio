@@ -1,9 +1,10 @@
 import HeroSection from "@/components/sections/HeroSection";
 import MarqueeTicker from "@/components/sections/MarqueeTicker";
 import AboutSection from "@/components/sections/AboutSection";
-import ProjectSection from "@/components/sections/ProjectSection";
 import TechStackSection from "@/components/sections/TechStackSection";
 import ExperienceSection from "@/components/sections/ExperienceSection";
+import ProjectSection from "@/components/sections/ProjectSection";
+import CreativeWorksSection from "@/components/sections/CreativeWorksSection";
 import ContactSection from "@/components/sections/ContactSection";
 
 export default function Home() {
@@ -12,9 +13,10 @@ export default function Home() {
       <HeroSection />
       <MarqueeTicker />
       <AboutSection />
-      <ProjectSection />
       <TechStackSection />
       <ExperienceSection />
+      <ProjectSection />
+      <CreativeWorksSection />
       <ContactSection />
     </div>
   );

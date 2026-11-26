@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState, useRef, useCallback } from "react";
+import { useEffect, useState, useRef } from "react";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
 
 interface TextScrambleProps {
@@ -22,11 +22,8 @@ export default function TextScramble({
   const iterationRef = useRef(0);
   const prefersReduced = useReducedMotion();
 
-  const scramble = useCallback(() => {
-    if (prefersReduced) {
-      setDisplayText(text);
-      return;
-    }
+  useEffect(() => {
+    if (!trigger || prefersReduced) return;
 
     iterationRef.current = 0;
     const interval = setInterval(() => {
@@ -51,15 +48,7 @@ export default function TextScramble({
     }, speed);
 
     return () => clearInterval(interval);
-  }, [text, prefersReduced, speed]);
+  }, [text, trigger, prefersReduced, speed]);
 
-  useEffect(() => {
-    if (trigger) {
-      const cleanup = scramble();
-      return cleanup;
-    }
-  }, [trigger, scramble]);
-
-  return <span className={className}>{displayText}</span>;
+  return <span className={className}>{prefersReduced ? text : displayText}</span>;
 }
-

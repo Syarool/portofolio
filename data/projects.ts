@@ -1,189 +1,262 @@
+export type ProjectStatus =
+  | "Production (Internal)"
+  | "Live"
+  | "Completed"
+  | "Active Development";
+
 export interface Project {
   id: string;
   slug: string;
   title: string;
   subtitle: string;
   category: string;
+  status: ProjectStatus;
   featured: boolean;
   period: string;
-  clientOrCompany: string;
+  companyOrContext: string;
+  thumbnailTheme:
+    | "hiring"
+    | "onboarding"
+    | "satupintu"
+    | "cv-screening"
+    | "aqiqah-sabian"
+    | "portfolio";
   shortDescription: string;
   fullDescription: string;
   problemStatement: string;
   solutionOverview: string;
   keyFeatures: string[];
-  businessImpact: {
-    metric: string;
-    label: string;
-    description: string;
-  }[];
-  originalTechStack: {
+  techStack: {
     frontend: string[];
     backend: string[];
     database: string[];
     tooling: string[];
   };
   tags: string[];
+  liveDemoUrl: string | null;
+  githubUrl: string | null;
   accentColor: string;
 }
 
 export const PROJECTS: Project[] = [
   {
-    id: "kawan-apex",
-    slug: "kawan-apex-hiring-onboarding",
-    title: "KAWAN APEX",
-    subtitle: "Open Hiring & Employee Onboarding Platform",
-    category: "Recruitment & Onboarding",
+    id: "kawan-apex-hiring",
+    slug: "kawan-apex-open-hiring",
+    title: "Kawan Apex – Open Hiring & Recruitment System",
+    subtitle: "End-to-End Talent Acquisition & Applicant Tracking Platform",
+    category: "Business System",
+    status: "Production (Internal)",
     featured: true,
     period: "2024",
-    clientOrCompany: "PT Apex Mitra Prima",
+    companyOrContext: "PT. Apex Mitra Prima (Maganghub)",
+    thumbnailTheme: "hiring",
     shortDescription:
-      "A recruitment and employee onboarding platform developed to streamline candidate management, recruitment workflows, document verification, and employee onboarding.",
+      "A centralized web platform built to digitize job postings, candidate registration, recruitment stages, and hiring manager evaluations for PT. Apex Mitra Prima.",
     fullDescription:
-      "Kawan Apex is an enterprise-grade digital hiring and automated onboarding platform engineered for PT Apex Mitra Prima. Built from the ground up to eliminate hiring friction, it unites candidate application intakes, hiring manager review stages, automated status notifications, and digital document collection into an intuitive single pane of glass.",
+      "Kawan Apex Open Hiring is a dedicated recruitment portal and applicant tracking system developed during the Maganghub Business System Development program at PT. Apex Mitra Prima. It connects public job applicants directly with internal HR workflows, providing structured pipeline stages and clear evaluation visibility.",
     problemStatement:
-      "PT Apex Mitra Prima previously handled recruitment and onboarding through fragmented spreadsheets, manual physical paperwork, and disparate chat channels. This resulted in delayed candidate turnaround times, document loss risks, and administrative overload for the HR and operations teams.",
+      "Recruitment workflows previously relied on scattered email attachments, manual spreadsheets, and ad-hoc chat updates, making applicant tracking slow and prone to missed follow-ups.",
     solutionOverview:
-      "Architected a dedicated full-stack platform featuring a public-facing career portal, an administrative candidate kanban board, and a guided self-service onboarding portal. Designed a modular Node.js & Express API with Knex.js query builder and SQLite relational storage for reliable internal deployment, paired with a blazing-fast React + TypeScript frontend built on Vite and Tailwind CSS.",
+      "Built a full-stack recruitment platform with a responsive public career portal and an internal recruiter dashboard featuring multi-stage candidate progression, structured screening notes, and automated database persistence.",
     keyFeatures: [
-      "Dynamic Multi-Stage Hiring Pipeline: Real-time candidate progression (Screening, Technical Interview, Executive Review, Offering, Onboarded).",
-      "Automated Candidate Portal: Allows applicants to track application status in real-time without constant manual HR email inquiries.",
-      "Digital Onboarding Checklist: Interactive wizard for new hires to submit compliance documents, tax IDs, and direct deposit details before Day 1.",
-      "Role-Based Access Control (RBAC): Tailored permissions for Hiring Managers, Department Heads, and HR Administrators.",
-      "Document Verification Engine: Automated file type validation, previewing, and secure record archiving.",
-      "Audit Trail & Event Logs: Complete traceability of candidate status changes and document approvals.",
+      "Public Career Portal with structured role requirements and streamlined application intake",
+      "Multi-stage Applicant Tracking Pipeline (Applied, Screening, Interview, Final Review, Hired)",
+      "Recruiter & Hiring Manager assessment views with status history",
+      "Automated validation for candidate profiles and uploaded CV documents",
+      "Role-based access permissions for HR and departmental reviewers",
     ],
-    businessImpact: [
-      {
-        metric: "68%",
-        label: "Onboarding Time Reduction",
-        description: "Reduced time spent collecting and validating new hire documents from days to hours.",
-      },
-      {
-        metric: "100%",
-        label: "Paperless Recruitment",
-        description: "Completely phased out physical forms and redundant email threads for applicant data.",
-      },
-      {
-        metric: "4.9 / 5",
-        label: "Candidate & HR Rating",
-        description: "Significantly elevated candidate first-impression and internal recruiter workflow.",
-      },
-    ],
-    originalTechStack: {
+    techStack: {
       frontend: ["React", "TypeScript", "Vite", "Tailwind CSS"],
-      backend: ["Node.js", "Express.js", "REST API", "JWT Auth"],
-      database: ["SQLite", "Knex.js (Migrations & Seeds)"],
-      tooling: ["Git", "Postman", "Figma", "VS Code"],
+      backend: ["Node.js", "Express.js", "REST API"],
+      database: ["SQLite", "Knex.js"],
+      tooling: ["Git", "Figma", "VS Code"],
     },
-    tags: [
-      "React",
-      "TypeScript",
-      "Vite",
-      "Tailwind CSS",
-      "Node.js",
-      "Express.js",
-      "SQLite",
-      "Knex.js",
-    ],
+    tags: ["React", "TypeScript", "Vite", "Tailwind CSS", "Node.js", "Express.js", "SQLite", "Knex.js"],
+    liveDemoUrl: null,
+    githubUrl: null,
     accentColor: "#D89A5B",
   },
   {
-    id: "cv-screening-system",
-    slug: "cv-screening-system",
-    title: "CV SCREENING SYSTEM",
-    subtitle: "Candidate Qualification & Profile Parsing Engine",
-    category: "System Analysis & Intelligence",
+    id: "kawan-apex-onboarding",
+    slug: "kawan-apex-employee-onboarding",
+    title: "Kawan Apex – Employee Onboarding System",
+    subtitle: "Paperless New-Hire Transition & Compliance Verification Portal",
+    category: "Business System",
+    status: "Production (Internal)",
     featured: true,
     period: "2024",
-    clientOrCompany: "Human Capital Optimization",
+    companyOrContext: "PT. Apex Mitra Prima (Maganghub)",
+    thumbnailTheme: "onboarding",
     shortDescription:
-      "A digital solution for processing and screening candidate CVs based on qualifications, education, and work experience.",
+      "A guided digital onboarding ecosystem automating new employee document collection, compliance checklists, and pre-day-one readiness.",
     fullDescription:
-      "An automated candidate evaluation system developed to parse resumes, benchmark applicant credentials against structured job descriptions, and rank candidates using rule-based algorithmic scoring.",
+      "Designed as the seamless continuation of the Kawan Apex ecosystem, the Employee Onboarding System transforms how newly hired candidates transition into active employees by replacing paper checklists and manual document verification with an interactive self-service portal.",
     problemStatement:
-      "Reviewing hundreds of candidate resumes manually created significant fatigue, inconsistent scoring standards, and delayed responses to qualified talent.",
+      "New hires previously faced repetitive physical paperwork, slow manual ID/tax verification across departments, and unclear onboarding milestones prior to starting.",
     solutionOverview:
-      "Constructed a structured resume ingestion and evaluation engine that extracts candidate work histories, skills, and academic qualifications into standardized profiles with instant keyword matching and weighted criteria.",
+      "Engineered a step-by-step onboarding portal integrated with structured relational records, allowing HR teams to verify compliance documents digitally and track readiness in real time.",
     keyFeatures: [
-      "Automated PDF & DOCX Parsing: Structured text extraction into standardized JSON talent profiles.",
-      "Weighted Criterion Matching: Dynamic scorecards tailored to specific departmental job descriptions.",
-      "Comparative Candidate Matrix: Side-by-side qualification comparison for hiring panels.",
-      "Data Export & Integration: Synchronizes verified shortlist candidates directly into recruitment pipelines.",
+      "Interactive step-by-step onboarding checklist for newly accepted candidates",
+      "Digital upload and HR verification flow for identity, tax, and administrative documents",
+      "Automated progress tracking from offer acceptance to Day-1 readiness",
+      "Centralized employee initialization records linked directly from hiring data",
+      "Clean, responsive UI designed to reduce candidate confusion",
     ],
-    businessImpact: [
-      {
-        metric: "75%",
-        label: "Screening Efficiency",
-        description: "Cut down initial resume evaluation duration from 15 minutes to under 3 minutes per applicant.",
-      },
-      {
-        metric: "94%",
-        label: "Matching Accuracy",
-        description: "Ensured standardized qualification rubrics across all hiring managers.",
-      },
-      {
-        metric: "Zero",
-        label: "Overlooked Applicants",
-        description: "Every submission receives systematic analysis and structured categorization.",
-      },
-    ],
-    originalTechStack: {
-      frontend: ["Next.js", "TypeScript", "Tailwind CSS", "Framer Motion"],
-      backend: ["Node.js", "Express.js", "REST API", "PDF Extraction"],
-      database: ["PostgreSQL", "Prisma ORM"],
-      tooling: ["Git", "Figma", "VS Code"],
+    techStack: {
+      frontend: ["React", "TypeScript", "Vite", "Tailwind CSS"],
+      backend: ["Node.js", "Express.js", "REST API"],
+      database: ["SQLite", "Knex.js"],
+      tooling: ["Git", "Figma", "Postman"],
     },
-    tags: ["Next.js", "TypeScript", "Tailwind CSS", "PostgreSQL", "Prisma", "System Analysis"],
-    accentColor: "#B8B3AA",
+    tags: ["React", "TypeScript", "Vite", "Tailwind CSS", "Node.js", "Express.js", "SQLite", "Knex.js"],
+    liveDemoUrl: null,
+    githubUrl: null,
+    accentColor: "#7CE0D3",
   },
   {
-    id: "creative-works",
-    slug: "creative-works-experiments",
-    title: "CREATIVE WORKS",
-    subtitle: "Interactive Digital Products & Design Experiments",
-    category: "Design & Interaction",
+    id: "satupintu-kawan-apex",
+    slug: "satupintu-kawan-apex",
+    title: "SatuPintu Kawan Apex – Employee Management System",
+    subtitle: "Unified Internal Employee Directory & Operational Monitoring Hub",
+    category: "Enterprise Platform",
+    status: "Production (Internal)",
     featured: true,
-    period: "2023 - 2025",
-    clientOrCompany: "Design Lab & Visual Research",
+    period: "2024 - 2025",
+    companyOrContext: "PT. Apex Mitra Prima (Maganghub)",
+    thumbnailTheme: "satupintu",
     shortDescription:
-      "A flexible area for additional digital products, visual experiments, and design projects exploring motion and interaction.",
+      "A single-portal employee management system centralizing employee records, internal monitoring, and operational HR coordination.",
     fullDescription:
-      "A curated collection of micro-applications, experimental web interactions, design token systems, and kinetic prototypes bridging human emotion with computational precision.",
+      "SatuPintu Kawan Apex serves as the unified internal workspace (one-door gateway) for managing active employee profiles, monitoring administrative status, and streamlining internal business processes within PT. Apex Mitra Prima.",
     problemStatement:
-      "Software often feels sterile when engineering ignores emotional craft. Modern web experiences require seamless physics, responsive typographic hierarchy, and delight.",
+      "Employee records and departmental status tracking were distributed across disconnected files, creating friction during administrative audits and operational monitoring.",
     solutionOverview:
-      "Developed a series of experimental interfaces focusing on physics-based spring mechanics, 60 FPS scroll timelines, accessible color harmonies, and fluid spatial layouts.",
+      "Developed a centralized employee management portal consolidating employee data, departmental mapping, and system monitoring dashboards under one consistent architecture.",
     keyFeatures: [
-      "Kinetic Micro-Interactions: Physics-driven gestures, cursor magnetism, and organic spring curves.",
-      "Design Systems & Token Architectures: Reusable UI component libraries created in Figma and coded in React.",
-      "Algorithmic Data Visualizers: Interactive canvas charts for real-time data inspection.",
-      "Fluid Typography & Layouts: Adaptive typographic grids scaling across mobile, tablet, and widescreen.",
+      "Centralized Employee Master Data directory with fast search and filtering",
+      "Operational & administrative status monitoring dashboard",
+      "Seamless data continuity from Kawan Apex Onboarding records",
+      "Structured relational schema ensuring consistent employee history",
+      "UI/UX optimization tailored for daily HR and management workflows",
     ],
-    businessImpact: [
-      {
-        metric: "60 FPS",
-        label: "Fluid Motion",
-        description: "Silky hardware-accelerated animations across modern desktop and mobile browsers.",
-      },
-      {
-        metric: "100%",
-        label: "Design Consistency",
-        description: "Unified token architecture translating Figma design systems directly into Tailwind CSS.",
-      },
-      {
-        metric: "Awwwards",
-        label: "Design Inspiration",
-        description: "Crafted following world-class creative web aesthetics and editorial sensibilities.",
-      },
-    ],
-    originalTechStack: {
-      frontend: ["Next.js", "React", "TypeScript", "Tailwind CSS"],
-      backend: ["Next.js API", "Server Actions"],
-      database: ["PostgreSQL", "SQL"],
-      tooling: ["GSAP", "ScrollTrigger", "Figma", "Lenis"],
+    techStack: {
+      frontend: ["React", "TypeScript", "Tailwind CSS"],
+      backend: ["Node.js", "Express.js", "REST API"],
+      database: ["SQLite", "PostgreSQL", "Knex.js"],
+      tooling: ["Git", "Figma", "VS Code"],
     },
-    tags: ["GSAP", "ScrollTrigger", "Framer Motion", "Figma", "UI/UX Design", "Creative Problem Solver"],
-    accentColor: "#75604D",
+    tags: ["React", "TypeScript", "Tailwind CSS", "Node.js", "Express.js", "System Monitoring"],
+    liveDemoUrl: null,
+    githubUrl: null,
+    accentColor: "#E8B059",
+  },
+  {
+    id: "cv-screening-system",
+    slug: "cv-screening-candidate-filtering",
+    title: "CV Screening & Candidate Filtering System",
+    subtitle: "Qualification Benchmarking & Automated Resume Filtering Tool",
+    category: "System Analysis & Automation",
+    status: "Completed",
+    featured: true,
+    period: "2024",
+    companyOrContext: "Human Capital Process Optimization",
+    thumbnailTheme: "cv-screening",
+    shortDescription:
+      "A digital filtering system designed to parse, evaluate, and shortlist candidate CVs based on role qualifications, education, and experience criteria.",
+    fullDescription:
+      "Built to accelerate early-stage candidate screening, this system extracts key qualification attributes from incoming resumes and evaluates applicants against structured job requirements, enabling recruiters to focus quickly on high-fit talent.",
+    problemStatement:
+      "Manual review of high-volume CV submissions led to screening fatigue, inconsistent evaluation rubrics, and bottlenecks when shortlisting qualified applicants.",
+    solutionOverview:
+      "Created a rule-based qualification parser and candidate filtering dashboard that categorizes resumes by skills, education background, and relevant experience criteria.",
+    keyFeatures: [
+      "Automated extraction and structuring of applicant qualification metadata",
+      "Multi-criteria filtering by education level, experience years, and core skills",
+      "Structured qualification matching checklist for faster HR shortlisting",
+      "Clean side-by-side applicant comparison table",
+    ],
+    techStack: {
+      frontend: ["Next.js", "TypeScript", "Tailwind CSS"],
+      backend: ["Node.js", "Next.js API", "Document Parsing"],
+      database: ["PostgreSQL", "Prisma"],
+      tooling: ["Git", "VS Code", "Figma"],
+    },
+    tags: ["Next.js", "TypeScript", "Tailwind CSS", "PostgreSQL", "Prisma", "Filtering"],
+    liveDemoUrl: null,
+    githubUrl: null,
+    accentColor: "#A78BFA",
+  },
+  {
+    id: "digital-invitation-aqiqah-sabian",
+    slug: "digital-invitation-aqiqah-sabian",
+    title: "Digital Invitation – Aqiqah Sabian",
+    subtitle: "Interactive Mobile-First Digital Event Invitation",
+    category: "Web Experience",
+    status: "Completed",
+    featured: true,
+    period: "2024",
+    companyOrContext: "Event Web Design & Development",
+    thumbnailTheme: "aqiqah-sabian",
+    shortDescription:
+      "An interactive, mobile-optimized digital invitation website featuring personalized guest greetings, schedule details, location guide, and wishes wall.",
+    fullDescription:
+      "A bespoke digital event invitation crafted for the Aqiqah celebration of Sabian. Engineered with warm visual storytelling, smooth entrance transitions, effortless mobile navigation, and interactive guest attendance & prayer notes.",
+    problemStatement:
+      "Traditional printed invitations are static, costly to distribute across distant relatives, and cannot provide instant map navigation or dynamic guest wishes.",
+    solutionOverview:
+      "Designed and built a fast, mobile-first digital invitation web app with custom visual framing, clear event schedule cards, Google Maps integration, and interactive guestbook feedback.",
+    keyFeatures: [
+      "Personalized guest greeting parameter support via URL",
+      "Smooth section transitions and mobile-friendly single-hand layout",
+      "Event countdown, schedule breakdown, and venue navigation link",
+      "Interactive guest wishes and RSVP confirmation section",
+    ],
+    techStack: {
+      frontend: ["Next.js", "React", "TypeScript", "Tailwind CSS", "Framer Motion"],
+      backend: ["Next.js API Routes"],
+      database: ["Static / JSON Storage"],
+      tooling: ["Figma", "Git", "VS Code"],
+    },
+    tags: ["Next.js", "React", "Tailwind CSS", "Framer Motion", "UI/UX Design"],
+    liveDemoUrl: null,
+    githubUrl: null,
+    accentColor: "#6EE7B7",
+  },
+  {
+    id: "personal-portfolio-website",
+    slug: "personal-portfolio-website",
+    title: "Personal Portfolio Website",
+    subtitle: "Interactive Pixel Space Developer Portfolio & Case Study Showcase",
+    category: "Web & Creative Dev",
+    status: "Live",
+    featured: true,
+    period: "2025",
+    companyOrContext: "Personal Brand — Syahrul Ramadhana",
+    thumbnailTheme: "portfolio",
+    shortDescription:
+      "A modern pixel-art space developer portfolio featuring interactive astronaut & planet parallax animations, data-driven project architecture, and responsive design.",
+    fullDescription:
+      "Designed and built to showcase both business system engineering depth and creative frontend execution. Combines a custom animated pixel-art cosmos (moving astronaut, orbiting planets, multi-depth starfields) with clean charcoal editorial readability and App Router performance.",
+    problemStatement:
+      "Conventional developer portfolios often feel generic and fail to communicate both enterprise problem-solving depth and visual creativity.",
+    solutionOverview:
+      "Engineered a modular Next.js App Router site pairing Framer Motion parallax physics, bespoke crisp-edge pixel art scenes, data-driven case studies, and accessible UI across devices.",
+    keyFeatures: [
+      "Interactive 16-bit Pixel Art Space hero with animated astronaut and orbiting planets",
+      "Multi-layer scroll parallax & cursor reactivity respecting prefers-reduced-motion",
+      "Data-driven project architecture with 3D hover cards and full specification modal",
+      "Curated Creative Works visual gallery with category filtering and lightbox view",
+      "Self-hosted Next.js fonts and optimized asset delivery",
+    ],
+    techStack: {
+      frontend: ["Next.js", "React", "TypeScript", "Tailwind CSS", "Framer Motion", "Lucide React"],
+      backend: ["Next.js App Router"],
+      database: ["Data-Driven Static Configuration"],
+      tooling: ["Git", "GitHub", "Vercel", "VS Code"],
+    },
+    tags: ["Next.js", "TypeScript", "Tailwind CSS", "Framer Motion", "Pixel Art", "Vercel"],
+    liveDemoUrl: "https://syahrulramadhana-portfolio.vercel.app",
+    githubUrl: "https://github.com/Syarool/portofolio",
+    accentColor: "#F59E0B",
   },
 ];
