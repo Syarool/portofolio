@@ -30,7 +30,7 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
   return (
     <AnimatePresence>
       <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 md:p-8">
-        {/* Backdrop with dark editorial blur */}
+        {/* Backdrop */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -39,42 +39,42 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
           className="fixed inset-0 bg-[#10100F]/90 backdrop-blur-md"
         />
 
-        {/* Modal Window */}
+        {/* Modal Window: Pixel Style */}
         <motion.div
-          initial={{ opacity: 0, scale: 0.96, y: 20 }}
+          initial={{ opacity: 0, scale: 0.96, y: 15 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
-          exit={{ opacity: 0, scale: 0.96, y: 20 }}
+          exit={{ opacity: 0, scale: 0.96, y: 15 }}
           transition={{ type: "spring", damping: 28, stiffness: 320 }}
-          className="relative max-h-[90vh] w-full max-w-4xl overflow-y-auto rounded-3xl border border-[#F5F1E8]/15 bg-[#171615] p-6 sm:p-8 md:p-12 shadow-2xl text-[#F5F1E8]"
+          className="pixel-box relative max-h-[90vh] w-full max-w-4xl overflow-y-auto bg-[#171615] p-6 sm:p-8 md:p-10 text-[#F5F1E8]"
         >
           {/* Close Button */}
           <button
             onClick={onClose}
-            className="absolute top-6 right-6 flex h-10 w-10 items-center justify-center rounded-full border border-[#F5F1E8]/15 bg-[#10100F] text-[#B8B3AA] transition-colors hover:border-[#D89A5B] hover:text-[#F5F1E8]"
+            className="absolute top-5 right-5 flex h-9 w-9 items-center justify-center border-2 border-[#F5F1E8]/20 bg-[#10100F] text-[#B8B3AA] transition-all hover:border-[#D89A5B] hover:text-[#F5F1E8] shadow-[2px_2px_0_0_#000] active:translate-x-0.5 active:translate-y-0.5"
             aria-label="Close modal"
           >
-            <X className="h-5 w-5" />
+            <X className="h-4 w-4" />
           </button>
 
           {/* Header */}
-          <div className="space-y-3 pr-12">
-            <div className="flex flex-wrap items-center gap-3">
-              <span className="rounded-full border border-[#D89A5B]/30 bg-[#D89A5B]/10 px-3 py-1 text-xs font-medium text-[#D89A5B]">
+          <div className="space-y-2.5 pr-12">
+            <div className="flex flex-wrap items-center gap-2">
+              <span className="pixel-badge">
                 {project.category}
               </span>
-              <span className="text-xs text-[#B8B3AA]">
+              <span className="text-xs font-mono text-[#B8B3AA]">
                 {project.period} // {project.clientOrCompany}
               </span>
             </div>
-            <h2 className="font-serif-headline text-3xl sm:text-4xl md:text-5xl font-normal tracking-tight text-[#F5F1E8]">
+            <h2 className="font-pixel text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-[#F5F1E8]">
               {project.title}
             </h2>
-            <p className="text-base sm:text-lg text-[#B8B3AA] font-light">
+            <p className="text-sm sm:text-base font-mono text-[#D89A5B]">
               {project.subtitle}
             </p>
           </div>
 
-          <div className="my-8 h-px w-full bg-[#F5F1E8]/10" />
+          <div className="my-6 h-0.5 w-full bg-[#F5F1E8]/10" />
 
           {/* Core Description */}
           <div className="space-y-4 text-[#F5F1E8]/90 text-sm sm:text-base font-light leading-relaxed">
@@ -82,63 +82,61 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
           </div>
 
           {/* Original Tech Stack Spotlight */}
-          <div className="mt-8 rounded-2xl border border-[#F5F1E8]/10 bg-[#10100F]/60 p-6">
-            <div className="flex items-center gap-2 mb-2">
-              <Layers className="h-4 w-4 text-[#D89A5B]" />
-              <h3 className="text-xs sm:text-sm font-semibold tracking-wider uppercase text-[#F5F1E8]">
-                Original Production Architecture
-              </h3>
+          <div className="mt-8 border border-[#F5F1E8]/15 bg-[#121110] p-5 shadow-[3px_3px_0_0_#000]">
+            <div className="flex items-center gap-2 mb-2 font-pixel text-sm text-[#D89A5B] font-bold">
+              <Layers className="h-4 w-4" />
+              <span>ORIGINAL PRODUCTION ARCHITECTURE</span>
             </div>
-            <p className="text-xs text-[#B8B3AA] mb-4">
+            <p className="text-xs font-mono text-[#B8B3AA] mb-4">
               Real technology stack deployed for {project.title} at {project.clientOrCompany}:
             </p>
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 text-xs">
-              <div className="rounded-xl border border-[#F5F1E8]/8 bg-[#171615] p-3.5">
-                <div className="flex items-center gap-1.5 text-[#D89A5B] mb-2 font-medium">
-                  <Code2 className="h-4 w-4" /> Frontend
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3 text-xs font-mono">
+              <div className="bg-[#171615] p-3 border border-[#F5F1E8]/10">
+                <div className="flex items-center gap-1.5 text-[#D89A5B] mb-2 font-bold font-pixel">
+                  <Code2 className="h-3.5 w-3.5" /> Frontend
                 </div>
-                <div className="flex flex-wrap gap-1.5">
+                <div className="flex flex-wrap gap-1">
                   {project.originalTechStack.frontend.map((item, i) => (
-                    <span key={i} className="rounded bg-[#10100F] px-2 py-0.5 text-[#F5F1E8]">
+                    <span key={i} className="bg-[#10100F] px-1.5 py-0.5 text-[#F5F1E8] border border-[#F5F1E8]/10">
                       {item}
                     </span>
                   ))}
                 </div>
               </div>
 
-              <div className="rounded-xl border border-[#F5F1E8]/8 bg-[#171615] p-3.5">
-                <div className="flex items-center gap-1.5 text-[#F5F1E8] mb-2 font-medium">
-                  <Server className="h-4 w-4" /> Backend
+              <div className="bg-[#171615] p-3 border border-[#F5F1E8]/10">
+                <div className="flex items-center gap-1.5 text-[#F5F1E8] mb-2 font-bold font-pixel">
+                  <Server className="h-3.5 w-3.5 text-[#D89A5B]" /> Backend
                 </div>
-                <div className="flex flex-wrap gap-1.5">
+                <div className="flex flex-wrap gap-1">
                   {project.originalTechStack.backend.map((item, i) => (
-                    <span key={i} className="rounded bg-[#10100F] px-2 py-0.5 text-[#F5F1E8]">
+                    <span key={i} className="bg-[#10100F] px-1.5 py-0.5 text-[#F5F1E8] border border-[#F5F1E8]/10">
                       {item}
                     </span>
                   ))}
                 </div>
               </div>
 
-              <div className="rounded-xl border border-[#F5F1E8]/8 bg-[#171615] p-3.5">
-                <div className="flex items-center gap-1.5 text-[#D89A5B] mb-2 font-medium">
-                  <Database className="h-4 w-4" /> Database
+              <div className="bg-[#171615] p-3 border border-[#F5F1E8]/10">
+                <div className="flex items-center gap-1.5 text-[#D89A5B] mb-2 font-bold font-pixel">
+                  <Database className="h-3.5 w-3.5" /> Database
                 </div>
-                <div className="flex flex-wrap gap-1.5">
+                <div className="flex flex-wrap gap-1">
                   {project.originalTechStack.database.map((item, i) => (
-                    <span key={i} className="rounded bg-[#10100F] px-2 py-0.5 text-[#F5F1E8]">
+                    <span key={i} className="bg-[#10100F] px-1.5 py-0.5 text-[#D89A5B] border border-[#F5F1E8]/10">
                       {item}
                     </span>
                   ))}
                 </div>
               </div>
 
-              <div className="rounded-xl border border-[#F5F1E8]/8 bg-[#171615] p-3.5">
-                <div className="flex items-center gap-1.5 text-[#B8B3AA] mb-2 font-medium">
-                  <Layers className="h-4 w-4" /> Tooling
+              <div className="bg-[#171615] p-3 border border-[#F5F1E8]/10">
+                <div className="flex items-center gap-1.5 text-[#B8B3AA] mb-2 font-bold font-pixel">
+                  <Layers className="h-3.5 w-3.5 text-[#D89A5B]" /> Tooling
                 </div>
-                <div className="flex flex-wrap gap-1.5">
+                <div className="flex flex-wrap gap-1">
                   {project.originalTechStack.tooling.map((item, i) => (
-                    <span key={i} className="rounded bg-[#10100F] px-2 py-0.5 text-[#F5F1E8]">
+                    <span key={i} className="bg-[#10100F] px-1.5 py-0.5 text-[#F5F1E8] border border-[#F5F1E8]/10">
                       {item}
                     </span>
                   ))}
@@ -148,39 +146,37 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
           </div>
 
           {/* Problem & Solution Grid */}
-          <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div className="rounded-2xl border border-[#F5F1E8]/10 bg-[#10100F]/40 p-5">
-              <span className="text-xs uppercase tracking-wider text-[#D89A5B] font-semibold">
-                Operational Problem
+          <div className="mt-6 grid grid-cols-1 md:grid-cols-2 gap-4 font-mono text-xs">
+            <div className="border border-[#F5F1E8]/10 bg-[#121110] p-4">
+              <span className="font-pixel text-xs uppercase text-[#D89A5B] font-bold block">
+                [ OPERATIONAL PROBLEM ]
               </span>
-              <p className="mt-2 text-sm text-[#B8B3AA] leading-relaxed">
+              <p className="mt-2 text-[#B8B3AA] leading-relaxed">
                 {project.problemStatement}
               </p>
             </div>
-            <div className="rounded-2xl border border-[#F5F1E8]/10 bg-[#10100F]/40 p-5">
-              <span className="text-xs uppercase tracking-wider text-[#F5F1E8] font-semibold">
-                Engineered Solution
+            <div className="border border-[#F5F1E8]/10 bg-[#121110] p-4">
+              <span className="font-pixel text-xs uppercase text-[#F5F1E8] font-bold block">
+                [ ENGINEERED SOLUTION ]
               </span>
-              <p className="mt-2 text-sm text-[#B8B3AA] leading-relaxed">
+              <p className="mt-2 text-[#B8B3AA] leading-relaxed">
                 {project.solutionOverview}
               </p>
             </div>
           </div>
 
           {/* Key Features */}
-          <div className="mt-8">
-            <h4 className="text-sm font-semibold uppercase tracking-wider text-[#F5F1E8] mb-4 flex items-center gap-2">
-              <CheckCircle2 className="h-4 w-4 text-[#D89A5B]" /> Core Platform Capabilities
+          <div className="mt-6">
+            <h4 className="font-pixel text-sm uppercase text-[#F5F1E8] mb-3 flex items-center gap-2 font-bold">
+              <CheckCircle2 className="h-4 w-4 text-[#D89A5B]" /> CORE CAPABILITIES
             </h4>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 font-mono text-xs">
               {project.keyFeatures.map((feat, idx) => (
                 <div
                   key={idx}
-                  className="flex items-start gap-2.5 rounded-xl border border-[#F5F1E8]/8 bg-[#10100F]/30 p-3 text-xs sm:text-sm text-[#B8B3AA]"
+                  className="flex items-start gap-2 border border-[#F5F1E8]/8 bg-[#121110] p-2.5 text-[#B8B3AA]"
                 >
-                  <span className="mt-0.5 flex h-4 w-4 shrink-0 items-center justify-center rounded-full bg-[#D89A5B]/15 text-[#D89A5B] text-[10px]">
-                    ✓
-                  </span>
+                  <span className="text-[#D89A5B] font-bold font-pixel">▸</span>
                   <span>{feat}</span>
                 </div>
               ))}
@@ -188,23 +184,23 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
           </div>
 
           {/* Business Impact Metrics */}
-          <div className="mt-8">
-            <h4 className="text-sm font-semibold uppercase tracking-wider text-[#F5F1E8] mb-4 flex items-center gap-2">
-              <TrendingUp className="h-4 w-4 text-[#D89A5B]" /> Business Impact
+          <div className="mt-6">
+            <h4 className="font-pixel text-sm uppercase text-[#F5F1E8] mb-3 flex items-center gap-2 font-bold">
+              <TrendingUp className="h-4 w-4 text-[#D89A5B]" /> BUSINESS IMPACT
             </h4>
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
               {project.businessImpact.map((impact, i) => (
                 <div
                   key={i}
-                  className="rounded-xl border border-[#F5F1E8]/8 bg-[#10100F]/50 p-4 text-center"
+                  className="border border-[#F5F1E8]/10 bg-[#121110] p-3.5 text-center font-mono"
                 >
-                  <div className="font-serif-headline text-3xl font-light text-[#D89A5B]">
+                  <div className="font-pixel text-2xl font-bold text-[#D89A5B]">
                     {impact.metric}
                   </div>
-                  <div className="mt-1 text-xs font-medium text-[#F5F1E8]">
+                  <div className="mt-1 text-xs font-bold text-[#F5F1E8]">
                     {impact.label}
                   </div>
-                  <p className="mt-1 text-[11px] text-[#B8B3AA] leading-relaxed">
+                  <p className="mt-1 text-[10px] text-[#B8B3AA] leading-relaxed">
                     {impact.description}
                   </p>
                 </div>
@@ -213,12 +209,12 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
           </div>
 
           {/* Modal Action Footer */}
-          <div className="mt-8 flex flex-wrap items-center justify-between gap-4 border-t border-[#F5F1E8]/10 pt-6">
-            <div className="flex flex-wrap gap-2">
+          <div className="mt-8 flex flex-wrap items-center justify-between gap-4 border-t border-[#F5F1E8]/10 pt-5">
+            <div className="flex flex-wrap gap-1.5">
               {project.tags.map((tag, i) => (
                 <span
                   key={i}
-                  className="rounded-md border border-[#F5F1E8]/10 bg-[#10100F] px-2.5 py-1 text-xs text-[#B8B3AA]"
+                  className="pixel-badge !text-[9px]"
                 >
                   #{tag}
                 </span>
@@ -226,9 +222,9 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
             </div>
             <button
               onClick={onClose}
-              className="rounded-full border border-[#F5F1E8]/20 bg-[#10100F] px-6 py-2.5 text-xs uppercase tracking-wider text-[#F5F1E8] transition-colors hover:border-[#D89A5B] hover:text-[#D89A5B]"
+              className="pixel-btn-outline !py-1.5 !px-4 !text-xs"
             >
-              Close
+              CLOSE WINDOW
             </button>
           </div>
         </motion.div>

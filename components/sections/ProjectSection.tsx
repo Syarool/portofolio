@@ -5,7 +5,7 @@ import { motion, AnimatePresence } from "motion/react";
 import { PROJECTS, Project } from "@/data/projects";
 import RevealOnScroll from "../animations/RevealOnScroll";
 import ProjectModal from "../ui/ProjectModal";
-import { ArrowUpRight, Layers, Eye } from "lucide-react";
+import { ArrowUpRight, Layers, Eye, Terminal, CheckCircle2 } from "lucide-react";
 
 export default function ProjectSection() {
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
@@ -14,71 +14,61 @@ export default function ProjectSection() {
   return (
     <section
       id="projects"
-      className="relative py-28 sm:py-36 lg:py-44 bg-[#10100F] text-[#F5F1E8] overflow-hidden border-t border-[#F5F1E8]/6"
+      className="relative py-24 sm:py-32 lg:py-36 bg-[#10100F] text-[#F5F1E8] overflow-hidden border-t-2 border-[#D89A5B]/20"
     >
       {/* Ambient glow left */}
-      <div className="pointer-events-none absolute top-1/4 -left-32 h-[500px] w-[500px] rounded-full bg-[#D89A5B]/5 blur-[150px]" />
+      <div className="pointer-events-none absolute top-1/4 -left-32 h-[450px] w-[450px] rounded-full bg-[#D89A5B]/5 blur-[150px]" />
 
-      {/* Ghost number */}
+      {/* Decorative Pixel Watermark */}
       <div
-        className="pointer-events-none absolute -left-4 top-12 select-none section-ghost-number"
+        className="pointer-events-none absolute -left-4 top-10 select-none font-pixel text-8xl sm:text-9xl font-bold text-white/[0.03]"
         aria-hidden="true"
       >
-        02
+        QUEST_02
       </div>
 
       <div className="mx-auto max-w-7xl px-6 sm:px-8 lg:px-12 relative z-10">
         {/* Section Header */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-12 border-b border-[#F5F1E8]/10">
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-10 border-b border-[#F5F1E8]/10">
           <RevealOnScroll direction="up">
-            <div className="space-y-3">
-              <div className="flex items-center gap-3">
-                <span className="h-px w-6 bg-[#D89A5B]" />
-                <span className="text-xs uppercase tracking-widest text-[#D89A5B] font-semibold">
-                  Selected Works
-                </span>
-              </div>
-              <h2 className="font-serif-headline text-4xl sm:text-5xl lg:text-7xl font-normal tracking-tight text-[#F5F1E8]">
-                Things I&apos;ve Built.
+            <div className="space-y-2">
+              <span className="pixel-badge">
+                <Terminal className="h-3 w-3" />
+                QUEST 02 // BUILT SYSTEMS
+              </span>
+              <h2 className="font-pixel text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-[#F5F1E8]">
+                THINGS I&apos;VE BUILT<span className="text-[#D89A5B]">.</span>
               </h2>
             </div>
           </RevealOnScroll>
 
           <RevealOnScroll direction="up" delay={0.1}>
-            <p className="text-xs sm:text-sm text-[#B8B3AA] max-w-sm font-light leading-relaxed">
-              A curated collection of mission-critical business platforms, qualification engines, and experimental digital products.
+            <p className="text-xs sm:text-sm text-[#B8B3AA] max-w-sm font-mono leading-relaxed">
+              [ MISSION LOG ] Production platforms, automated candidate screening engines, and interactive applications.
             </p>
           </RevealOnScroll>
         </div>
 
-        {/* Project Selector Navigation */}
-        <div className="mt-8 flex items-center gap-2 overflow-x-auto pb-2">
+        {/* Project Selector Navigation (Retro Pixel Slots) */}
+        <div className="mt-8 flex items-center gap-2.5 overflow-x-auto pb-2">
           {PROJECTS.map((proj, idx) => (
             <button
               key={proj.id}
               onClick={() => setActiveTab(idx)}
-              className={`flex items-center gap-3 px-5 py-3 rounded-full text-left transition-all whitespace-nowrap ${
+              className={`flex items-center gap-2.5 px-4 py-2.5 font-pixel text-xs sm:text-sm transition-all whitespace-nowrap border-2 ${
                 activeTab === idx
-                  ? "bg-[#F5F1E8] text-[#10100F]"
-                  : "border border-[#F5F1E8]/10 text-[#B8B3AA] hover:border-[#F5F1E8]/30 hover:text-[#F5F1E8]"
+                  ? "bg-[#D89A5B] text-[#10100F] border-[#D89A5B] shadow-[3px_3px_0_0_#000] font-bold"
+                  : "bg-[#171615] text-[#B8B3AA] border-[#F5F1E8]/15 hover:border-[#F5F1E8]/40 hover:text-[#F5F1E8] shadow-[2px_2px_0_0_#000]"
               }`}
             >
-              <span
-                className={`font-serif-headline text-sm font-light ${
-                  activeTab === idx ? "text-[#D89A5B]" : ""
-                }`}
-              >
-                0{idx + 1}
-              </span>
-              <span className="text-xs font-medium tracking-wide uppercase">
-                {proj.title}
-              </span>
+              <span className="opacity-80">0{idx + 1}.</span>
+              <span className="tracking-wide uppercase">{proj.title}</span>
             </button>
           ))}
         </div>
 
         {/* Active Project Showcase */}
-        <div className="mt-12">
+        <div className="mt-10">
           <AnimatePresence mode="wait">
             {PROJECTS.map((project, idx) => {
               if (activeTab !== idx) return null;
@@ -87,28 +77,28 @@ export default function ProjectSection() {
               return (
                 <motion.div
                   key={project.id}
-                  initial={{ opacity: 0, y: 30 }}
+                  initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -20 }}
-                  transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-                  className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center"
+                  exit={{ opacity: 0, y: -15 }}
+                  transition={{ duration: 0.35 }}
+                  className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center"
                 >
                   {/* Left: Project Story */}
-                  <div className="lg:col-span-6 space-y-6">
-                    <div className="flex flex-wrap items-center gap-3">
-                      <span className="rounded-full border border-[#D89A5B]/30 bg-[#D89A5B]/10 px-3.5 py-1 text-xs font-medium text-[#D89A5B]">
+                  <div className="lg:col-span-6 space-y-5">
+                    <div className="flex flex-wrap items-center gap-2">
+                      <span className="pixel-badge">
                         {project.category}
                       </span>
-                      <span className="text-xs text-[#B8B3AA]">
-                        {project.period} · {project.clientOrCompany}
+                      <span className="text-xs font-mono text-[#B8B3AA]">
+                        {project.period} // {project.clientOrCompany}
                       </span>
                     </div>
 
                     <div>
-                      <h3 className="font-serif-headline text-3xl sm:text-4xl lg:text-5xl font-normal text-[#F5F1E8] leading-tight">
+                      <h3 className="font-pixel text-3xl sm:text-4xl lg:text-5xl font-bold text-[#F5F1E8] leading-tight">
                         {project.title}
                       </h3>
-                      <p className="mt-2 text-base sm:text-lg text-[#D89A5B] font-light">
+                      <p className="mt-1 text-sm sm:text-base text-[#D89A5B] font-mono">
                         {project.subtitle}
                       </p>
                     </div>
@@ -117,174 +107,169 @@ export default function ProjectSection() {
                       {project.shortDescription}
                     </p>
 
-                    {/* Tech Stack Card */}
-                    <div className="rounded-2xl border border-[#F5F1E8]/10 bg-[#171615] p-5 space-y-3">
-                      <div className="flex items-center justify-between text-xs">
-                        <span className="uppercase tracking-wider text-[#D89A5B] font-medium flex items-center gap-1.5">
+                    {/* Production Tech Stack Card */}
+                    <div className="pixel-box p-4 bg-[#141211] space-y-3">
+                      <div className="flex items-center justify-between text-xs font-mono">
+                        <span className="uppercase text-[#D89A5B] font-bold flex items-center gap-1.5 font-pixel text-sm">
                           <Layers className="h-3.5 w-3.5" />
-                          {isKawanApex ? "Actual Production Stack" : "Technology Stack"}
+                          {isKawanApex ? "ACTUAL PRODUCTION STACK" : "TECHNOLOGY STACK"}
                         </span>
                         {isKawanApex && (
-                          <span className="text-[10px] text-[#B8B3AA] border border-[#F5F1E8]/10 rounded px-2 py-0.5">
-                            Original Tech — Not Misrepresented
+                          <span className="text-[10px] text-[#B8B3AA] border border-[#F5F1E8]/20 px-1.5 py-0.5">
+                            ORIGINAL DEPLOYED STACK
                           </span>
                         )}
                       </div>
 
-                      <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 text-xs">
-                        <div className="rounded-xl border border-[#F5F1E8]/6 bg-[#10100F] p-2.5">
-                          <span className="text-[10px] text-[#B8B3AA] block uppercase mb-1">Frontend</span>
-                          <span className="font-medium text-[#F5F1E8] block leading-tight">
+                      <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 text-xs font-mono">
+                        <div className="bg-[#1a1817] p-2 border border-[#F5F1E8]/10">
+                          <span className="text-[9px] text-[#B8B3AA] block uppercase mb-0.5">Frontend</span>
+                          <span className="font-bold text-[#F5F1E8] block truncate">
                             {project.originalTechStack.frontend[0]}
                           </span>
-                          <span className="text-[10px] text-[#B8B3AA]/70 block leading-tight">
+                          <span className="text-[9px] text-[#B8B3AA]/70 block truncate">
                             {project.originalTechStack.frontend.slice(1).join(", ")}
                           </span>
                         </div>
-                        <div className="rounded-xl border border-[#F5F1E8]/6 bg-[#10100F] p-2.5">
-                          <span className="text-[10px] text-[#B8B3AA] block uppercase mb-1">Backend</span>
-                          <span className="font-medium text-[#F5F1E8] block leading-tight">
+                        <div className="bg-[#1a1817] p-2 border border-[#F5F1E8]/10">
+                          <span className="text-[9px] text-[#B8B3AA] block uppercase mb-0.5">Backend</span>
+                          <span className="font-bold text-[#F5F1E8] block truncate">
                             {project.originalTechStack.backend[0]}
                           </span>
-                          <span className="text-[10px] text-[#B8B3AA]/70 block leading-tight">
+                          <span className="text-[9px] text-[#B8B3AA]/70 block truncate">
                             {project.originalTechStack.backend.slice(1).join(", ")}
                           </span>
                         </div>
-                        <div className="rounded-xl border border-[#F5F1E8]/6 bg-[#10100F] p-2.5">
-                          <span className="text-[10px] text-[#B8B3AA] block uppercase mb-1">Database</span>
-                          <span className="font-medium text-[#D89A5B] block leading-tight">
+                        <div className="bg-[#1a1817] p-2 border border-[#F5F1E8]/10">
+                          <span className="text-[9px] text-[#B8B3AA] block uppercase mb-0.5">Database</span>
+                          <span className="font-bold text-[#D89A5B] block truncate">
                             {project.originalTechStack.database[0]}
                           </span>
-                          <span className="text-[10px] text-[#B8B3AA]/70 block leading-tight">
+                          <span className="text-[9px] text-[#B8B3AA]/70 block truncate">
                             {project.originalTechStack.database[1] || "Relational"}
                           </span>
                         </div>
-                        <div className="rounded-xl border border-[#F5F1E8]/6 bg-[#10100F] p-2.5">
-                          <span className="text-[10px] text-[#B8B3AA] block uppercase mb-1">Tooling</span>
-                          <span className="font-medium text-[#F5F1E8] block leading-tight">
+                        <div className="bg-[#1a1817] p-2 border border-[#F5F1E8]/10">
+                          <span className="text-[9px] text-[#B8B3AA] block uppercase mb-0.5">Tooling</span>
+                          <span className="font-bold text-[#F5F1E8] block truncate">
                             {project.originalTechStack.tooling[0]}
                           </span>
-                          <span className="text-[10px] text-[#B8B3AA]/70 block leading-tight">
+                          <span className="text-[9px] text-[#B8B3AA]/70 block truncate">
                             {project.originalTechStack.tooling.slice(1).join(", ")}
                           </span>
                         </div>
                       </div>
                     </div>
 
-                    {/* Impact Stats */}
-                    <div className="grid grid-cols-3 gap-4">
+                    {/* Impact Stats Grid */}
+                    <div className="grid grid-cols-3 gap-3">
                       {project.businessImpact.map((impact, i) => (
-                        <div key={i} className="border-l-2 border-[#D89A5B]/30 pl-3">
-                          <span className="font-serif-headline text-2xl text-[#D89A5B] block font-light">
+                        <div key={i} className="border-l-2 border-[#D89A5B] pl-2.5">
+                          <span className="font-pixel text-2xl text-[#D89A5B] font-bold block">
                             {impact.metric}
                           </span>
-                          <span className="text-[11px] uppercase tracking-wider text-[#B8B3AA] block mt-0.5 leading-tight">
+                          <span className="text-[10px] font-mono uppercase tracking-wider text-[#B8B3AA] block mt-0.5">
                             {impact.label}
                           </span>
                         </div>
                       ))}
                     </div>
 
-                    {/* CTA */}
-                    <button
-                      onClick={() => setSelectedProject(project)}
-                      className="group inline-flex items-center gap-2.5 rounded-full bg-[#F5F1E8] px-6 py-3 text-xs font-medium tracking-wide text-[#10100F] transition-all hover:bg-[#D89A5B] hover:scale-[1.02]"
-                    >
-                      <Eye className="h-3.5 w-3.5" />
-                      <span>View Project Details</span>
-                      <ArrowUpRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-                    </button>
+                    {/* Action Button */}
+                    <div className="pt-1">
+                      <button
+                        onClick={() => setSelectedProject(project)}
+                        className="pixel-btn"
+                      >
+                        <Eye className="h-4 w-4" />
+                        <span>VIEW SPECIFICATIONS</span>
+                        <ArrowUpRight className="h-4 w-4" />
+                      </button>
+                    </div>
                   </div>
 
-                  {/* Right: Editorial Mockup Card */}
+                  {/* Right: Retro Window Mockup */}
                   <div className="lg:col-span-6">
-                    <div className="relative mx-auto max-w-lg lg:max-w-none">
-                      {/* Decorative accent border */}
-                      <div className="absolute -inset-px rounded-3xl bg-gradient-to-br from-[#D89A5B]/20 via-transparent to-transparent" />
-
-                      <div className="relative rounded-3xl border border-[#F5F1E8]/10 bg-[#171615] p-6 sm:p-8 shadow-2xl">
-                        {/* Interface Bar */}
-                        <div className="flex items-center justify-between pb-4 border-b border-[#F5F1E8]/10 text-xs text-[#B8B3AA]">
-                          <div className="flex items-center gap-2">
-                            <div className="flex gap-1.5">
-                              <div className="h-2.5 w-2.5 rounded-full bg-[#ff5f57]" />
-                              <div className="h-2.5 w-2.5 rounded-full bg-[#febc2e]" />
-                              <div className="h-2.5 w-2.5 rounded-full bg-[#28c840]" />
-                            </div>
-                            <span className="ml-2 font-serif-subtle italic text-[#F5F1E8]/70">
-                              {project.title}
-                            </span>
-                          </div>
-                          <span className="rounded bg-[#D89A5B]/15 border border-[#D89A5B]/20 px-2 py-0.5 text-[10px] text-[#D89A5B]">
-                            LIVE BUILD
+                    <div className="pixel-box p-4 sm:p-5 bg-[#171615]">
+                      {/* Window Header */}
+                      <div className="flex items-center justify-between pb-3 border-b border-[#F5F1E8]/10 text-xs font-mono text-[#B8B3AA]">
+                        <div className="flex items-center gap-2">
+                          <span className="inline-block w-2.5 h-2.5 bg-[#D89A5B]" />
+                          <span className="font-pixel text-xs text-[#F5F1E8]">
+                            [SYS_VIEW]: {project.title}.EXE
                           </span>
                         </div>
+                        <span className="pixel-badge text-[9px] !py-0.5">
+                          LIVE RUNTIME
+                        </span>
+                      </div>
 
-                        {/* Mockup content */}
-                        <div className="mt-5 space-y-3 text-xs font-light">
-                          {isKawanApex ? (
-                            <>
-                              <div className="rounded-xl border border-[#F5F1E8]/8 bg-[#10100F] p-4 space-y-3">
-                                <div className="flex items-center justify-between">
-                                  <span className="font-medium text-[#F5F1E8]">Candidate Pipeline</span>
-                                  <span className="text-[10px] text-[#D89A5B]">5 Active Stages</span>
-                                </div>
-                                <div className="grid grid-cols-5 gap-1">
-                                  {["Applied", "Screening", "Interview", "Assessing", "Onboarded"].map((stage, si) => (
-                                    <div
-                                      key={stage}
-                                      className={`rounded-lg p-2 text-center border ${
-                                        si === 1
-                                          ? "border-[#D89A5B]/30 bg-[#D89A5B]/10 text-[#D89A5B]"
-                                          : "border-[#F5F1E8]/6 bg-[#171615] text-[#B8B3AA]"
-                                      }`}
-                                    >
-                                      <span className="text-[9px] block leading-tight">{stage}</span>
-                                      <span className="font-serif-headline text-sm block mt-0.5">
-                                        {[142, 38, 21, 28, 16][si]}
-                                      </span>
-                                    </div>
-                                  ))}
-                                </div>
-                              </div>
-
-                              <div className="rounded-xl border border-[#F5F1E8]/8 bg-[#10100F] p-4 space-y-2">
-                                <span className="text-[10px] uppercase tracking-wider text-[#D89A5B] font-medium block">
-                                  Onboarding Checklist
+                      {/* Mockup Body Content */}
+                      <div className="mt-4 space-y-3 font-mono text-xs">
+                        {isKawanApex ? (
+                          <>
+                            <div className="bg-[#121110] p-3.5 border border-[#F5F1E8]/10 space-y-2.5">
+                              <div className="flex items-center justify-between">
+                                <span className="font-bold text-[#F5F1E8] font-pixel text-sm">
+                                  CANDIDATE ONBOARDING PIPELINE
                                 </span>
-                                {[
-                                  "Identity Verification & Tax Documents",
-                                  "Digital Employment NDA Signature",
-                                  "Department Hardware Allocation",
-                                ].map((item, ii) => (
-                                  <div key={ii} className="flex items-center justify-between text-[11px]">
-                                    <span className="text-[#B8B3AA]">{ii + 1}. {item}</span>
-                                    <span className="text-[#D89A5B]">✓</span>
+                                <span className="text-[10px] text-[#D89A5B]">ACTIVE</span>
+                              </div>
+                              <div className="grid grid-cols-5 gap-1.5 text-center">
+                                {["APPLIED", "SCREEN", "INTERVIEW", "ASSESS", "ONBOARD"].map((stage, si) => (
+                                  <div
+                                    key={stage}
+                                    className={`p-1.5 border ${
+                                      si === 3
+                                        ? "border-[#D89A5B] bg-[#D89A5B]/15 text-[#D89A5B]"
+                                        : "border-[#F5F1E8]/10 bg-[#171615] text-[#B8B3AA]"
+                                    }`}
+                                  >
+                                    <span className="text-[8px] block font-mono">{stage}</span>
+                                    <span className="font-pixel text-base font-bold block mt-0.5">
+                                      {[142, 38, 21, 28, 16][si]}
+                                    </span>
                                   </div>
                                 ))}
                               </div>
-                            </>
-                          ) : (
-                            <div className="rounded-xl border border-[#F5F1E8]/8 bg-[#10100F] p-6 space-y-4">
-                              <span className="text-[10px] uppercase tracking-wider text-[#D89A5B] font-medium block">
-                                Solution Blueprint
-                              </span>
-                              <p className="text-[#B8B3AA] leading-relaxed">
-                                {project.solutionOverview}
-                              </p>
-                              <div className="flex flex-wrap gap-2 pt-1">
-                                {project.tags.map((tag) => (
-                                  <span
-                                    key={tag}
-                                    className="rounded-md border border-[#F5F1E8]/10 bg-[#171615] px-2.5 py-1 text-[11px] text-[#F5F1E8]/80"
-                                  >
-                                    {tag}
-                                  </span>
-                                ))}
-                              </div>
                             </div>
-                          )}
-                        </div>
+
+                            <div className="bg-[#121110] p-3.5 border border-[#F5F1E8]/10 space-y-2">
+                              <span className="text-[10px] uppercase text-[#D89A5B] font-bold block font-pixel">
+                                AUTOMATED VERIFICATION ENGINE
+                              </span>
+                              {[
+                                "Identity Verification & Document OCR",
+                                "Digital NDA & Employment Contract",
+                                "Hardware & Resource Provisioning",
+                              ].map((item, ii) => (
+                                <div key={ii} className="flex items-center justify-between text-[11px] text-[#B8B3AA]">
+                                  <span>{ii + 1}. {item}</span>
+                                  <span className="text-[#D89A5B] font-bold">[VERIFIED]</span>
+                                </div>
+                              ))}
+                            </div>
+                          </>
+                        ) : (
+                          <div className="bg-[#121110] p-4 border border-[#F5F1E8]/10 space-y-3">
+                            <span className="font-pixel text-sm text-[#D89A5B] font-bold block">
+                              ARCHITECTURE BLUEPRINT
+                            </span>
+                            <p className="text-[#B8B3AA] text-xs leading-relaxed">
+                              {project.solutionOverview}
+                            </p>
+                            <div className="flex flex-wrap gap-1.5 pt-1">
+                              {project.tags.map((tag) => (
+                                <span
+                                  key={tag}
+                                  className="pixel-badge !text-[9px]"
+                                >
+                                  {tag}
+                                </span>
+                              ))}
+                            </div>
+                          </div>
+                        )}
                       </div>
                     </div>
                   </div>

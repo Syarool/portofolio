@@ -61,19 +61,19 @@ export default function CustomCursor() {
 
   return (
     <div className="pointer-events-none fixed inset-0 z-50 overflow-hidden">
-      {/* Outer Glow Aura - Warm Muted Amber */}
+      {/* Outer Square - Pixel Reticle Aura */}
       <motion.div
-        className="fixed top-0 left-0 -translate-x-1/2 -translate-y-1/2 rounded-full border border-[#D89A5B]/40 bg-[#D89A5B]/5 backdrop-blur-[1px] transition-[width,height,background-color] duration-200"
+        className="fixed top-0 left-0 -translate-x-1/2 -translate-y-1/2 border-2 border-[#D89A5B]/60 bg-[#D89A5B]/10 transition-[width,height,background-color] duration-150 shadow-[2px_2px_0_0_#000]"
         style={{
           x: auraX,
           y: auraY,
-          width: isPointer ? 54 : 26,
-          height: isPointer ? 54 : 26,
+          width: isPointer ? 38 : 20,
+          height: isPointer ? 38 : 20,
         }}
       />
-      {/* Inner Dot - Warm Ivory */}
+      {/* Inner Pixel Dot */}
       <motion.div
-        className="fixed top-0 left-0 h-1.5 w-1.5 -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#F5F1E8]"
+        className="fixed top-0 left-0 h-2 w-2 -translate-x-1/2 -translate-y-1/2 bg-[#F5F1E8]"
         style={{
           x: cursorX,
           y: cursorY,

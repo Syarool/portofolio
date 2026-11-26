@@ -47,6 +47,123 @@ body {
   font-family: 'Cormorant Garamond', Georgia, serif;
 }
 
+/* ============================================================
+   MODERN-PIXEL HYBRID TYPOGRAPHY & UTILITIES
+   ============================================================ */
+.font-pixel {
+  font-family: 'Pixelify Sans', 'Silkscreen', monospace;
+  letter-spacing: 0.01em;
+}
+
+.font-pixel-accent {
+  font-family: 'Silkscreen', monospace;
+  letter-spacing: 0.05em;
+}
+
+/* Pixel box with retro hard shadows & crisp border */
+.pixel-box {
+  background: #171615;
+  border: 2px solid rgba(245, 241, 232, 0.16);
+  box-shadow: 4px 4px 0px 0px #0a0a09, 4px 4px 0px 1px rgba(216, 154, 91, 0.35);
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.pixel-box:hover {
+  border-color: rgba(216, 154, 91, 0.6);
+  box-shadow: 6px 6px 0px 0px #0a0a09, 6px 6px 0px 1px #D89A5B;
+  transform: translate(-1px, -1px);
+}
+
+/* Retro Interactive Button */
+.pixel-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: 'Pixelify Sans', monospace;
+  font-weight: 600;
+  padding: 0.75rem 1.5rem;
+  border: 2px solid #F5F1E8;
+  background: #F5F1E8;
+  color: #10100F;
+  box-shadow: 4px 4px 0px 0px #000;
+  transition: all 0.15s ease-out;
+  cursor: pointer;
+}
+
+.pixel-btn:hover {
+  background: #D89A5B;
+  border-color: #D89A5B;
+  box-shadow: 6px 6px 0px 0px #000;
+  transform: translate(-2px, -2px);
+}
+
+.pixel-btn:active {
+  transform: translate(2px, 2px);
+  box-shadow: 2px 2px 0px 0px #000;
+}
+
+.pixel-btn-outline {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: 'Pixelify Sans', monospace;
+  font-weight: 500;
+  padding: 0.75rem 1.5rem;
+  border: 2px solid rgba(245, 241, 232, 0.35);
+  background: rgba(16, 16, 15, 0.75);
+  color: #F5F1E8;
+  backdrop-filter: blur(8px);
+  box-shadow: 4px 4px 0px 0px #000;
+  transition: all 0.15s ease-out;
+}
+
+.pixel-btn-outline:hover {
+  border-color: #F5F1E8;
+  background: rgba(245, 241, 232, 0.12);
+  box-shadow: 6px 6px 0px 0px #000;
+  transform: translate(-2px, -2px);
+}
+
+.pixel-btn-outline:active {
+  transform: translate(2px, 2px);
+  box-shadow: 2px 2px 0px 0px #000;
+}
+
+/* 8-bit Quest Badge */
+.pixel-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-family: 'Silkscreen', monospace;
+  font-size: 0.65rem;
+  padding: 0.25rem 0.6rem;
+  border: 1px solid rgba(216, 154, 91, 0.4);
+  background: rgba(216, 154, 91, 0.1);
+  color: #D89A5B;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  box-shadow: 2px 2px 0px 0px #000;
+}
+
+/* Crisp pixel rendering */
+.pixelated {
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
+}
+
+/* Subtle CRT Scanlines (Lo-Fi game aesthetic) */
+.crt-overlay::before {
+  content: " ";
+  display: block;
+  position: fixed;
+  top: 0; left: 0; bottom: 0; right: 0;
+  background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.03), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.03));
+  z-index: 9997;
+  background-size: 100% 3px, 6px 100%;
+  pointer-events: none;
+  opacity: 0.35;
+}
+
 /* Warm subtle scrollbar */
 ::-webkit-scrollbar {
   width: 6px;
