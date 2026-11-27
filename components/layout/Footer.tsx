@@ -29,7 +29,8 @@ export default function Footer() {
               </span>
             </div>
             <p className="text-sm text-[#B8B3AA] font-light max-w-md leading-relaxed pt-1">
-              Building Digital Solutions Through Technology &amp; Innovation.
+              Developer and IT Enthusiast — building practical business systems
+              and interactive web experiences.
             </p>
           </div>
 

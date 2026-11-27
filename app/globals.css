@@ -29,6 +29,12 @@ html {
   overflow-x: hidden;
 }
 
+/* Hide native OS cursor while interactive Pixel Rocket cursor is active */
+html.has-rocket-cursor,
+html.has-rocket-cursor * {
+  cursor: none !important;
+}
+
 body {
   background: #0D0D10;
   color: #F5F1E8;

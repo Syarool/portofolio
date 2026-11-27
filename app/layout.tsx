@@ -40,11 +40,12 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Syahrul Ramadhana — Business System Developer & Web Developer",
+  title: "Syahrul Ramadhana — Developer and IT Enthusiast",
   description:
-    "Personal portfolio of Syahrul Ramadhana — Business System Developer focused on building digital products, business systems, and interactive web experiences.",
+    "Personal portfolio of Syahrul Ramadhana — Developer and IT Enthusiast focused on business systems, digital products, and interactive web experiences.",
   keywords: [
     "Syahrul Ramadhana",
+    "Developer and IT Enthusiast",
     "Business System Developer",
     "Web Developer",
     "PT Apex Mitra Prima",
@@ -62,16 +63,16 @@ export const metadata: Metadata = {
     type: "website",
     locale: "en_US",
     url: "https://syahrulramadhana-portfolio.vercel.app",
-    title: "Syahrul Ramadhana — Business System Developer & Web Developer",
+    title: "Syahrul Ramadhana — Developer and IT Enthusiast",
     description:
-      "Building Digital Solutions Through Technology & Innovation. Business System Developer at PT. Apex Mitra Prima (Maganghub).",
+      "Developer and IT Enthusiast · Business System Developer at PT. Apex Mitra Prima (Maganghub).",
     siteName: "Syahrul Ramadhana Portfolio",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Syahrul Ramadhana — Business System Developer & Web Developer",
+    title: "Syahrul Ramadhana — Developer and IT Enthusiast",
     description:
-      "Building Digital Solutions Through Technology & Innovation.",
+      "Developer and IT Enthusiast — building business systems and interactive web experiences.",
   },
 };
 

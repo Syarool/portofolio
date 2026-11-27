@@ -106,13 +106,13 @@ export default function AboutSection() {
                     <Image
                       src={
                         altPhoto
-                          ? "/images/syahrul-portrait.jpg"
-                          : "/images/syahrul-portrait-side.jpg"
+                          ? "/images/syahrul-portrait-side.jpg"
+                          : "/images/syahrul-portrait.jpg"
                       }
-                      alt="Syahrul Ramadhana — Business System Developer and Web Developer"
+                      alt="Syahrul Ramadhana — Developer and IT Enthusiast"
                       fill
                       sizes="(max-width: 768px) 100vw, 40vw"
-                      className="object-cover object-top"
+                      className="object-cover object-center"
                     />
                   </motion.div>
                   <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#0D0D10]/70 via-transparent to-transparent" />
@@ -124,7 +124,7 @@ export default function AboutSection() {
                     <MapPin className="h-3 w-3 text-[#D89A5B]" />
                     <span>Indonesia</span>
                   </div>
-                  <span className="text-[#7CE0D3] font-pixel text-xs">
+                  <span className="bg-[#D89A5B] text-[#0D0D10] px-2 py-0.5 font-pixel text-xs font-bold shadow-[2px_2px_0_0_#000]">
                     SYAHRUL RAMADHANA
                   </span>
                 </div>
@@ -146,8 +146,11 @@ export default function AboutSection() {
             <RevealOnScroll direction="up" delay={0.25}>
               <div className="space-y-4 text-sm sm:text-base font-light text-[#B8B3AA] leading-relaxed">
                 <p>
-                  I am <span className="text-[#F5F1E8] font-medium">Syahrul Ramadhana</span>,
-                  a Business System Developer and Web Developer focused on building
+                  I am{" "}
+                  <span className="bg-[#D89A5B]/20 border-b-2 border-[#D89A5B] px-1.5 py-0.5 text-[#F5F1E8] font-semibold">
+                    Syahrul Ramadhana
+                  </span>
+                  , a Developer and IT Enthusiast focused on building
                   practical digital products that connect business logic, clean
                   database architecture, and intuitive UI/UX.
                 </p>
